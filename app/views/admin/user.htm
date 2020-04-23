@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">  
+  <title></title>
+  <base href="<?=base_url('app/views/admin/')?>">
+  <link rel="stylesheet" href="<?=base_url();?>../static/bootstrap/css/bootstrap.min.css" >
+  <link rel="stylesheet" href="css/admin.css" >
+  <link rel="stylesheet" href="<?=base_url();?>../static/bootstrap/css/main.css" >
+</head>
+
+<body>
+
+<div class="container-fluid">
+  
+    <ol class="breadcrumb">    
+      <li class="active"><i class="glyphicon glyphicon-map-marker"></i> 用户管理</li>
+      <li class="active">用户列表</li>
+    </ol>
+
+  
+        <form id="search_form" action="<?php echo admin_url('user'); ?>" method="get">
+        <div class="row">
+              
+              <div class="col-sm-2">
+                  <div class="form-group">                    
+                          <input type="text" class="form-control" name="username" value="<?=$search['username']?>" placeholder="帐号">                   
+                  </div>
+              </div>
+
+              <div class="col-sm-2">
+                  <div class="form-group">                    
+                          <input type="text" class="form-control" name="realname" value="<?=$search['realname']?>" placeholder="姓名">                   
+                  </div>
+              </div>
+
+              <div class="col-sm-2">
+                  <div class="form-group">                    
+                          <input type="text" class="form-control" name="department" value="<?=$search['department']?>" placeholder="部门">                   
+                  </div>
+              </div>
+
+              <div class="col-sm-2">
+                  <div class="form-group">                    
+                          <input type="text" class="form-control" name="position" value="<?=$search['position']?>" placeholder="职位">                   
+                  </div>
+              </div>
+
+              <div class="col-sm-2">
+                  <div class="form-group">
+                       
+                          <select name="auth"  class="form-control" >
+                            <option value="0">所有权限</option>
+                            <option value="1" <?=$search['auth']==1 ? 'selected=selected':''?>
+                            >上传者1</option>
+                            <option value="2" <?=$search['auth']==2 ? 'selected=selected':''?>
+                            >上传者2</option>
+                            <option value="3" <?=$search['auth']==3 ? 'selected=selected':''?>
+                            >查看者</option>                              
+                        </select>                    
+                  </div>
+                       
+              </div>
+
+              <div class="col-sm-2">
+                 
+                     <input type="submit" name="" class="btn btn-block btn-success" value="搜索">
+                  
+              </div>
+
+
+              
+        </div>
+
+        <div class="line2"></div>
+
+        <!-- 排序 -->  
+        <input type="hidden" name="id_order" value="<?=$id_order?>">
+        </form> 
+          
+
+<!--   <div class="col-sm-2">
+                <a href="<?=admin_url('user/add');?>" class="btn btn-info" >
+                        <i class="glyphicon glyphicon-plus-sign"></i> 添加
+                </a>
+              </div>  -->     
+  <div class="panel panel-default">    
+    
+          <table class="table table-bordered table-hover table-condensed"">
+            <thead>
+            <tr>
+              <th>ID 
+                <a id="order_asc_btn" href="javascript:;" title="排序：升序">
+                  <i class="glyphicon glyphicon-sort-by-attributes <?=$id_order=='ASC' ? 'orderon' :'orderoff' ?>" ></i>
+                </a> 
+                <a id="order_desc_btn" href="javascript:;" title="排序：降序">
+                  <i class="glyphicon glyphicon-sort-by-attributes-alt <?=$id_order=='DESC' ? 'orderon' :'orderoff' ?>" ></i>
+                </a>
+              </th>
+              <th>帐号</th>             
+              <th>姓名</th>              
+              <th>部门</th>
+              <th>职位</th>
+              <th>权限</th>
+                  
+              <th>操作</th>           
+            </tr>
+            </thead>
+            <tbody>
+
+            <?php foreach($user as $v):?>  
+            <tr>
+              <td><?=$v['id']?></td>
+              <td><?=$v['username']?></td>
+              <td><?=$v['realname']?></td>             
+              <td><?=$v['department']?></td>              
+              <td><?=$v['position']?></td>              
+              <td><?=$v['auth']?></td>  
+
+              <td>  
+               
+              <!--   <a href="" class="btn btn-success btn-sm" title="日志">
+                  <i class="glyphicon glyphicon-list-alt"></i>
+                </a>    -->                    
+                <a href="<?=admin_url('user/edit/'.$v['id'])?>" class="btn btn-info btn-sm" title="编辑">
+                  <i class="glyphicon glyphicon-pencil"></i>
+                </a> 
+                <a href="<?=admin_url('user/del/'.$v['id'])?>" onclick="return confirm('确认要删除？')" class="btn btn-danger btn-sm" title="删除">
+                  <i class="glyphicon glyphicon-trash"></i>
+                </a>
+              </td>
+            </tr>
+            <?php endforeach?>
+
+
+            
+            
+
+
+            </tbody>
+          </table>
+    
+  </div>
+
+  <div class="pull-right"><?=$pages;?></div>
+
+</div>
+
+
+<?php
+$this->load->view('admin/footer.htm');
+?>
+<script type="text/javascript" src="<?=base_url();?>../static/js/jquery.min.js"></script>
+<script type="text/javascript" src="<?=base_url();?>../static/layer/layer.js"></script>
+
+<script type="text/javascript">
+
+$(function(){
+
+
+  
+
+   $('#order_asc_btn').click(function(){
+
+        $("#search_form input[name=id_order]").val('ASC');     
+        $("#search_form").submit();
+        
+        
+   });
+
+   $('#order_desc_btn').click(function(){
+
+        $("#search_form input[name=id_order]").val('DESC');     
+        $("#search_form").submit();
+        
+   });
+
+    
+
+   
+});  
+</script>
+
+</body>
+</html>

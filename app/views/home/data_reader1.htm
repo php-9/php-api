@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="Cache-Control" content="no-transform" /> 
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<base href="<?=base_url('app/views/home/')?>">	
+	<title>数据管理系统</title>
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	
+
+	<link rel="stylesheet" href="<?=base_url();?>../static/bootstrap/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="<?=base_url();?>../static/bootstrap/css/main.css" >
+	
+	
+</head>
+<body>
+
+<div class="container-fluid" >
+
+	
+
+	<?php $this->load->view('home/header.htm')?>
+
+
+	<form id="search_form" action="<?=site_url('data_reader/index'); ?>" method="get">
+	<div class="row">
+	      
+	      <div class="col-sm-2">
+	          <div class="form-group">                    
+	                  <input type="text" class="form-control" name="custom" value="<?=$search['custom']?>" placeholder="客户">                   
+	          </div>
+	      </div>
+
+	      <div class="col-sm-2">
+	          <div class="form-group">                    
+	                  <input type="text" class="form-control" name="drug" value="<?=$search['drug']?>" placeholder="药品">                   
+	          </div>
+	      </div>
+
+	      <div class="col-sm-2">
+	          <div class="form-group">                    
+	                  <input type="text" class="form-control" name="spec" value="<?=$search['spec']?>" placeholder="规格">                   
+	          </div>
+	      </div>
+
+	      <div class="col-sm-2">
+	          <div class="form-group">                    
+	                  <input type="text" class="form-control" name="factory" value="<?=$search['factory']?>" placeholder="厂家">                   
+	          </div>
+	      </div>
+
+	      <div class="col-sm-2">
+	          <div class="form-group">                    
+	                  <input type="text" class="form-control" name="num" value="<?=$search['num']?>" placeholder="数量">                   
+	          </div>
+	      </div>
+
+
+	      <div class="col-sm-2">
+	         
+	             <input type="submit" name="" class="btn btn-block btn-success" value="搜索">
+	          
+	      </div>
+
+	      <!-- 排序 -->  
+	      <input type="hidden" name="id_order" value="<?=$id_order?>">
+	      <input type="hidden" name="num_order" value="<?=$num_order?>">
+	      <input type="hidden" name="addtime_order" value="<?=$addtime_order?>">
+	      
+	</div>
+
+	<div class="line2"></div>
+
+	
+	</form> 
+
+
+ 	  <div class="panel panel-default">    
+ 	    
+ 	          <table class="table table-bordered table-hover table-condensed">
+ 	            <thead>
+ 	            <tr data-pid="0">
+ 	              <th>ID 
+ 	              	<a id="id_order_asc" href="javascript:;" title="排序：升序">
+ 	              	  <i class="glyphicon glyphicon-sort-by-attributes <?=$id_order=='ASC' ? 'orderon' :'orderoff' ?>" ></i>
+ 	              	</a> 
+ 	              	<a id="id_order_desc" href="javascript:;" title="排序：降序">
+ 	              	  <i class="glyphicon glyphicon-sort-by-attributes-alt <?=$id_order=='DESC' ? 'orderon' :'orderoff' ?>" ></i>
+ 	              	</a>
+ 	              </th>
+ 	              <th>客户名称</th>             
+ 	              <th>药品名称</th>              
+ 	              <th>规格</th>
+ 	              <th>厂家</th>
+ 	              <th>数量 
+ 	              	<a id="num_order_asc" href="javascript:;" title="排序：升序">
+ 	              	  <i class="glyphicon glyphicon-sort-by-attributes <?=$num_order=='ASC' ? 'orderon' :'orderoff' ?>" ></i>
+ 	              	</a> 
+ 	              	<a id="num_order_desc" href="javascript:;" title="排序：降序">
+ 	              	  <i class="glyphicon glyphicon-sort-by-attributes-alt <?=$num_order=='DESC' ? 'orderon' :'orderoff' ?>" ></i>
+ 	              	</a>
+ 	              </th>
+ 	               <th>添加时间 
+ 	               		<a id="addtime_order_asc" href="javascript:;" title="排序：升序">
+ 	               		  <i class="glyphicon glyphicon-sort-by-attributes <?=$addtime_order=='ASC' ? 'orderon' :'orderoff' ?>" ></i>
+ 	               		</a> 
+ 	               		<a id="addtime_order_desc" href="javascript:;" title="排序：降序">
+ 	               		  <i class="glyphicon glyphicon-sort-by-attributes-alt <?=$addtime_order=='DESC' ? 'orderon' :'orderoff' ?>" ></i>
+ 	               		</a>
+ 	               </th>   
+ 	                  
+ 	            </tr>
+ 	            </thead>
+ 	            <tbody>
+
+ 	            <?php foreach($data1 as $v):?>	
+ 	            <tr>
+ 	              <td><?=$v['id']?></td>
+ 	              <td><?=$v['custom']?></td>             
+ 	              <td><?=$v['drug']?></td>              
+ 	              <td><?=$v['spec']?></td>
+ 	              <td><?=$v['factory']?></td>
+ 	              <td><?=$v['num']?></td>  
+ 	              <td style="font-size: 12px;"><?=date('Y-m-d H:i',$v['addtime'])?></td>
+
+ 	              
+ 	            </tr>
+ 	            <?php endforeach;?>
+
+
+ 	            
+ 	           
+
+
+ 	            </tbody>
+ 	          </table>
+ 	    
+ 	  </div>
+ 	  <div class="pull-right"><?=$pages;?></div>
+
+
+
+ 	 
+
+
+</div>	
+<script type="text/javascript" src="<?=base_url();?>../static/js/jquery.min.js"></script>
+<script type="text/javascript" src="<?=base_url();?>../static/layer/layer.js"></script>
+
+<script type="text/javascript">
+
+$(function(){
+
+
+   
+	$('#username_btn').click(function(){
+		//页面层
+		layer.open({
+		  type: 1,
+		  skin: 'layui-layer-rim', //加上边框
+		  area: ['420px', '240px'], //宽高
+		  title:'帐号详情',
+		  content:$('#username_box')
+		});
+	});
+
+
+	$('#id_order_asc').click(function(){
+
+	     $("#search_form input[name=id_order]").val('ASC');
+
+	     $("#search_form input[name=num_order]").val('');
+	     $("#search_form input[name=addtime_order]").val('');
+
+	     $("#search_form").submit();
+	     
+	     
+	});
+
+	$('#id_order_desc').click(function(){
+
+	     $("#search_form input[name=id_order]").val('DESC');
+
+	     $("#search_form input[name=num_order]").val('');
+	     $("#search_form input[name=addtime_order]").val('');
+
+	     $("#search_form").submit();
+	     
+	});
+
+
+	$('#num_order_asc').click(function(){
+
+	     $("#search_form input[name=num_order]").val('ASC');
+
+	     $("#search_form input[name=id_order]").val('');
+	     $("#search_form input[name=addtime_order]").val('');
+
+	     $("#search_form").submit();
+	     
+	     
+	});
+
+	$('#num_order_desc').click(function(){
+
+	     $("#search_form input[name=num_order]").val('DESC');
+	     
+	     $("#search_form input[name=id_order]").val('');
+	     $("#search_form input[name=addtime_order]").val('');
+
+	     $("#search_form").submit();
+	     
+	});
+
+
+	$('#addtime_order_asc').click(function(){
+
+	     $("#search_form input[name=addtime_order]").val('ASC');
+
+	     $("#search_form input[name=id_order]").val('');
+	     $("#search_form input[name=num_order]").val('');
+
+	     $("#search_form").submit();
+	     
+	     
+	});
+
+	$('#addtime_order_desc').click(function(){
+
+	     $("#search_form input[name=addtime_order]").val('DESC');
+	     
+	      $("#search_form input[name=id_order]").val('');
+	     $("#search_form input[name=num_order]").val('');
+
+
+	     $("#search_form").submit();
+	     
+	});
+    
+
+   
+});  
+</script>
+</body>
+</html>

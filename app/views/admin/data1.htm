@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="Cache-Control" content="no-transform" /> 
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<base href="<?=base_url('app/views/home/')?>">	
+	<title>数据管理系统</title>
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	
+
+	<link rel="stylesheet" href="<?=base_url();?>../static/bootstrap/css/bootstrap.min.css" >
+	
+	<link rel="stylesheet" href="<?=base_url();?>../static/bootstrap/css/main.css" >
+	<style type="text/css">
+		.excel-data:before{
+			display: none;
+		}
+	</style>
+</head>
+<body>
+
+<div class="container-fluid" >
+
+	
+
+	<ol class="breadcrumb">
+	  <li class="active"><i class="glyphicon glyphicon-map-marker"></i> 数据管理</li>
+	  <li class="active">数据表1</li>
+	  <li class="pull-right excel-data"><a href="<?=admin_url('data1/import')?>"><i class="glyphicon glyphicon-log-in"></i> 导入数据</a></li>	  
+	</ol>
+
+
+	<form id="search_form" action="<?=admin_url('data1/index'); ?>" method="get">
+	<div class="row">
+	      
+	      <div class="col-sm-2">
+	          <div class="form-group">                    
+	                  <input type="text" class="form-control" name="custom" value="<?=$search['custom']?>" placeholder="客户">                   
+	          </div>
+	      </div>
+
+	      <div class="col-sm-2">
+	          <div class="form-group">                    
+	                  <input type="text" class="form-control" name="drug" value="<?=$search['drug']?>" placeholder="药品">                   
+	          </div>
+	      </div>
+
+	      <div class="col-sm-2">
+	          <div class="form-group">                    
+	                  <input type="text" class="form-control" name="spec" value="<?=$search['spec']?>" placeholder="规格">                   
+	          </div>
+	      </div>
+
+	      <div class="col-sm-2">
+	          <div class="form-group">                    
+	                  <input type="text" class="form-control" name="factory" value="<?=$search['factory']?>" placeholder="厂家">                   
+	          </div>
+	      </div>
+
+	      <div class="col-sm-2">
+	          <div class="form-group">                    
+	                  <input type="text" class="form-control" name="num" value="<?=$search['num']?>" placeholder="数量">                   
+	          </div>
+	      </div>
+
+
+	      <div class="col-sm-2">
+	         
+	             <input type="submit" name="" class="btn btn-block btn-success" value="搜索">
+	          
+	      </div>
+
+	      <!-- 排序 -->  
+	      <input type="hidden" name="id_order" value="<?=$id_order?>">
+	      <input type="hidden" name="num_order" value="<?=$num_order?>">
+	      <input type="hidden" name="addtime_order" value="<?=$addtime_order?>">
+	      
+	</div>
+
+	<div class="line2"></div>
+
+	
+	</form> 
+
+
+ 	  <div class="panel panel-default">    
+ 	    
+ 	          <table class="table table-bordered table-hover table-condensed">
+ 	            <thead>
+ 	            <tr>
+
+ 	              <th style="text-align: center;">
+ 	              	<input type="checkbox" id="select_all">
+ 	              </th>		
+
+
+ 	              <th>ID 
+ 	              	<a id="id_order_asc" href="javascript:;" title="排序：升序">
+ 	              	  <i class="glyphicon glyphicon-sort-by-attributes <?=$id_order=='ASC' ? 'orderon' :'orderoff' ?>" ></i>
+ 	              	</a> 
+ 	              	<a id="id_order_desc" href="javascript:;" title="排序：降序">
+ 	              	  <i class="glyphicon glyphicon-sort-by-attributes-alt <?=$id_order=='DESC' ? 'orderon' :'orderoff' ?>" ></i>
+ 	              	</a>
+ 	              </th>
+ 	              <th>客户名称</th>             
+ 	              <th>药品名称</th>              
+ 	              <th>规格</th>
+ 	              <th>厂家</th>
+ 	              <th>数量 
+ 	              	<a id="num_order_asc" href="javascript:;" title="排序：升序">
+ 	              	  <i class="glyphicon glyphicon-sort-by-attributes <?=$num_order=='ASC' ? 'orderon' :'orderoff' ?>" ></i>
+ 	              	</a> 
+ 	              	<a id="num_order_desc" href="javascript:;" title="排序：降序">
+ 	              	  <i class="glyphicon glyphicon-sort-by-attributes-alt <?=$num_order=='DESC' ? 'orderon' :'orderoff' ?>" ></i>
+ 	              	</a>
+ 	              </th>
+ 	               <th>添加时间 
+ 	               		<a id="addtime_order_asc" href="javascript:;" title="排序：升序">
+ 	               		  <i class="glyphicon glyphicon-sort-by-attributes <?=$addtime_order=='ASC' ? 'orderon' :'orderoff' ?>" ></i>
+ 	               		</a> 
+ 	               		<a id="addtime_order_desc" href="javascript:;" title="排序：降序">
+ 	               		  <i class="glyphicon glyphicon-sort-by-attributes-alt <?=$addtime_order=='DESC' ? 'orderon' :'orderoff' ?>" ></i>
+ 	               		</a>
+ 	               </th>   
+ 	              <th>操作</th>           
+ 	            </tr>
+ 	            </thead>
+ 	            <tbody>
+
+ 	            <?php foreach($data1 as $v):?>	
+ 	            <tr>
+ 	              <td  style="text-align: center;"><input class="select_item" type="checkbox" name="<?=$v['id']?>"></td>	
+ 	              <td><?=$v['id']?></td>
+ 	              <td><?=$v['custom']?></td>             
+ 	              <td><?=$v['drug']?></td>              
+ 	              <td><?=$v['spec']?></td>
+ 	              <td><?=$v['factory']?></td>
+ 	              <td><?=$v['num']?></td>  
+ 	              <td style="font-size: 12px;"><?=date('Y-m-d H:i',$v['addtime'])?></td>
+
+ 	              <td>
+ 	                       
+ 	                <!-- <a href="<?=site_url('data1/log/'.$v['id'])?>" class="btn btn-success btn-sm" title="日志">
+ 	                	<i class="glyphicon glyphicon-list-alt"></i>
+ 	                </a>  -->      
+ 	                <a href="<?=admin_url('data1/edit/'.$v['id'])?>" class="btn btn-info btn-sm" title="修改">
+ 	                	<i class="glyphicon glyphicon-pencil"></i>
+ 	                </a> 
+ 	                <a href="<?=admin_url('data1/del/'.$v['id'])?>" onclick="return confirm('确认要删除？')" class="btn btn-danger btn-sm" title="删除">
+ 	                	<i class="glyphicon glyphicon-trash"></i>
+ 	                </a>
+ 	              </td>
+ 	            </tr>
+ 	            <?php endforeach;?>
+
+
+ 	            <?php if($data1):?>
+ 	            <form action="<?=admin_url('data1/select_del')?>" method="post" enctype="multipart/form-data">
+ 	            	 <input type="hidden" name="select_str">
+ 	            	 <tr>
+ 	            	 	<td colspan="1" style="text-align: center;">
+ 	            	 		<a id="select_del_btn" type="submit" onclick="return confirm('确认要批量删除？')" class="btn btn-danger btn-sm">
+ 	            	 			<i class="glyphicon glyphicon-trash"></i>
+ 	            	 		</a>
+ 	            	 	</td>
+
+ 	            	 	<td colspan="8"></td>
+ 	            	 </tr>
+ 	            </form>
+ 	             <?php endif;?>
+ 	           
+
+
+ 	            </tbody>
+ 	          </table>
+ 	    
+ 	  </div>
+ 	  <div class="pull-right"><?=$pages;?></div>
+
+
+
+ 	 
+
+
+</div>	
+<script type="text/javascript" src="<?=base_url();?>../static/js/jquery.min.js"></script>
+<script type="text/javascript" src="<?=base_url();?>../static/layer/layer.js"></script>
+
+<script type="text/javascript">
+
+$(function(){
+
+
+
+
+
+	$('#id_order_asc').click(function(){
+
+	     $("#search_form input[name=id_order]").val('ASC');
+
+	     $("#search_form input[name=num_order]").val('');
+	     $("#search_form input[name=addtime_order]").val('');
+
+	     $("#search_form").submit();
+	     
+	     
+	});
+
+	$('#id_order_desc').click(function(){
+
+	     $("#search_form input[name=id_order]").val('DESC');
+
+	     $("#search_form input[name=num_order]").val('');
+	     $("#search_form input[name=addtime_order]").val('');
+
+	     $("#search_form").submit();
+	     
+	});
+
+
+	$('#num_order_asc').click(function(){
+
+	     $("#search_form input[name=num_order]").val('ASC');
+
+	     $("#search_form input[name=id_order]").val('');
+	     $("#search_form input[name=addtime_order]").val('');
+
+	     $("#search_form").submit();
+	     
+	     
+	});
+
+	$('#num_order_desc').click(function(){
+
+	     $("#search_form input[name=num_order]").val('DESC');
+	     
+	     $("#search_form input[name=id_order]").val('');
+	     $("#search_form input[name=addtime_order]").val('');
+
+	     $("#search_form").submit();
+	     
+	});
+
+
+	$('#addtime_order_asc').click(function(){
+
+	     $("#search_form input[name=addtime_order]").val('ASC');
+
+	     $("#search_form input[name=id_order]").val('');
+	     $("#search_form input[name=num_order]").val('');
+
+	     $("#search_form").submit();
+	     
+	     
+	});
+
+	$('#addtime_order_desc').click(function(){
+
+	     $("#search_form input[name=addtime_order]").val('DESC');
+	     
+	      $("#search_form input[name=id_order]").val('');
+	     $("#search_form input[name=num_order]").val('');
+
+
+	     $("#search_form").submit();
+	     
+	});
+
+
+
+	//*****************************************************/
+	//批量删除
+	//全选
+	$('#select_all').click(function(){
+		
+
+			if($(this).is(':checked')){//选择了
+				$('.select_item').prop('checked',true);
+			}else{//取消选择
+				$('.select_item').prop('checked',false);;
+			}
+		
+			
+	});
+
+	//提交前处理
+	$('#select_del_btn').click(function(){
+		var select_str=[];
+		$('.select_item').each(function(i,e){
+			if( $(this).prop('checked') ){
+				select_str.push( $(this).attr('name') );
+			}
+		});
+		$('input[name=select_str]').val(select_str);		
+		console.log(select_str);
+		$('form').submit();
+	});
+    
+
+   
+});  
+</script>
+</body>
+</html>

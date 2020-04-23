@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <base href="<?=base_url('app/views/admin/')?>">
+  <link rel="stylesheet" href="<?=base_url();?>../static/bootstrap/css/bootstrap.min.css" >
+  <link rel="stylesheet" href="css/admin.css" >
+  <style type="text/css">
+  	.pagination {
+  	    display: inline-block;
+  	    padding-left: 0;
+  	    margin:0;
+  	    border-radius: 4px;
+  	}
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+	<ol class="breadcrumb">
+	  <li class="active"><span class="glyphicon glyphicon-list-alt" ></span> 帐户管理</li>
+	  <li class="active">管理员列表</li>
+	</ol>
+	<div class="panel panel-default">
+	<table class="table table-bordered table-condensed table-hover">
+		<thead>
+		<tr>
+			
+			<th>ID</th>			
+			<th>帐号</th>			
+			<th>操作</th>						
+		</tr>
+		</thead>
+		<tbody>
+		<?php foreach($admin as $v):?>
+		<tr>
+			
+			<td><?=$v['id']?></td>			
+			<td><?=$v['username']?></td>
+			
+			<td>
+				
+				<a href="<?=admin_url('admin/edit/'.$v['id'])?>" class="btn btn-info btn-sm" title="编辑" >
+					<i class="glyphicon glyphicon-edit"></i>
+				</a>				
+				<a href="<?=admin_url('admin/del/'.$v['id'])?>" onclick="return confirm('确认要删除？')" class="btn btn-danger btn-sm" title="删除">
+					<i class="glyphicon glyphicon-remove"></i>
+				</a>
+			</td>
+		</tr>
+		<?php endforeach?>
+		
+		
+		
+		
+		
+
+
+			
+		
+
+		</tbody>
+	</table>
+	</div>
+
+			
+		
+        
+		    
+	
+
+
+
+
+</div>
+
+
+<script type="text/javascript" src="<?=base_url();?>../static/js/jquery.min.js"></script>
+<script type="text/javascript" src="<?=base_url();?>../static/layer/layer.js"></script>
+
+
+
+<?php
+$this->load->view('admin/footer.htm');
+?>
+
+
+</body>
+</html>
+
+
+
+
+
+

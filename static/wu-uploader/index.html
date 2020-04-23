@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+		<title>wu-uploader上传组件示例</title>	
+		<script type="text/javascript" src="js/jQuery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="js/wu-uploader.js"></script>
+		<link rel="stylesheet" href="css/wu-uploader.css">
+	</head>
+	<body>
+		<h1 style="text-align:center;">wu-uploader上传组件示例</h1>
+	    <div class="wu-uploader-box" id="wu-uploader">
+	    	<ul>
+	    		<li>
+	    			<div class="wu-uploader-img">
+	    				<img src="./up/1575975047787.jpg">
+	    			</div>
+	    			<div class="wu-uploader-do">
+	    				<span class="wu-uploader-do-left">⇐</span>
+	    				<span class="wu-uploader-do-right">⇒</span>
+	    				<span  class="wu-uploader-do-del">⊗</span>
+	    			</div>
+	    			<input type="hidden" name="pic[]" value="./up/1575975047787.jpg">	    			
+	    		</li>
+	    		<li>
+	    			<div class="wu-uploader-img">
+	    				<img src="./up/1575975130739.png">
+	    			</div>
+	    			<div class="wu-uploader-do">
+	    				<span class="wu-uploader-do-left">⇐</span>
+	    				<span class="wu-uploader-do-right">⇒</span>
+	    				<span  class="wu-uploader-do-del">⊗</span>
+	    			</div>
+	    			<input type="hidden" name="pic[]" value="./up/1575975130739.png">
+	    		</li>	    		
+	    		<div class="wu-uploader-add" title="点击添加文件"></div>
+	    	</ul>
+	    	<div class="wu-uploader-msg"><!-- 消息显示 --></div>
+	    	<!-- 隐藏的input file -->
+	    	<input class="wu-uploader-file" type="file" multiple="multiple" style="display: none;">
+	    	
+	    </div>
+
+
+
+	    <div class="wu-uploader-box" id="wu-uploader1">
+	    	<ul>
+	    		<li>
+	    			<div class="wu-uploader-img">
+	    				<img src="./up/157598648996.jpg">
+	    			</div>
+	    			<div class="wu-uploader-do">
+	    				<span class="wu-uploader-do-left">⇐</span>
+	    				<span class="wu-uploader-do-right">⇒</span>
+	    				<span  class="wu-uploader-do-del">⊗</span>
+	    			</div>
+	    			<input type="hidden" name="pic[]" value="./up/157598648996.jpg">	    			
+	    		</li>
+	    		<li>
+	    			<div class="wu-uploader-img">
+	    				<img src="./up/157598648996.jpg">
+	    			</div>
+	    			<div class="wu-uploader-do">
+	    				<span class="wu-uploader-do-left">⇐</span>
+	    				<span class="wu-uploader-do-right">⇒</span>
+	    				<span  class="wu-uploader-do-del">⊗</span>
+	    			</div>
+	    			<input type="hidden" name="pic[]" value="./up/157598648996.jpg">
+	    		</li>	    		
+	    		<div class="wu-uploader-add" title="点击添加文件"></div>
+	    	</ul>
+	    	<div class="wu-uploader-msg"><!-- 消息显示 --></div>
+	    	<!-- 隐藏的input file -->
+	    	<input class="wu-uploader-file" type="file" multiple="multiple" style="display: none;">
+	    	
+	    </div>
+
+
+	</body>
+
+
+	<script>
+		/*ofile 文件上传工具 QQ:68242331 http://www.noweb.win/ */
+
+		jQuery('#wu-uploader').wuUploader({
+				url:'./up.php',//图片上传处理路径
+				inputName:'pic'//单图inputname
+				
+		});
+
+		jQuery('#wu-uploader1').wuUploader({
+				url:'./up.php',
+				inputName:'picxxxxx'//单图inputname
+				
+		});
+	</script>
+</html>
+
+
+
+
+
+
+

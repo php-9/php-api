@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="Cache-Control" content="no-transform" /> 
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<base href="<?=base_url('app/views/home/')?>">	
+	<title>数据管理系统</title>
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	
+
+	<link rel="stylesheet" href="<?=base_url();?>../static/bootstrap/css/bootstrap.min.css" >
+	
+	<style type="text/css">
+		body{
+			/*background: #f7f7f7;*/
+		}
+		.table>thead>tr>th{
+			vertical-align: middle;
+			text-align: left;
+		}
+		.table>tbody>tr>td{
+			vertical-align: middle;
+			text-align: left;
+		}
+		.container-fluid {
+		    padding-top: 15px;  	   
+		}
+		.line{
+		    border-top: 1px dashed #ddd;
+		    color: #ffffff;
+		    background-color: #ffffff;
+		    height: 1px;
+		    margin:15px 0;
+		}
+
+
+	</style>
+</head>
+<body>
+
+<div class="container-fluid" >
+
+
+
+
+ 	<?php $this->load->view('home/header.htm')?>
+
+ 	<ol class="breadcrumb">    
+ 	  <li class="active"><i class="glyphicon glyphicon-map-marker"></i> 添加数据</li> 	  
+ 	</ol>
+
+
+ 	<div class="panel panel-default">    
+ 	  <div class="panel-body">
+ 	        <form class="form-horizontal" action="<?=site_url('data1/add_pass'); ?>" method="post" enctype="multipart/form-data">
+ 	        		 
+ 	                  <div class="form-group">
+ 	                        <label class="col-sm-2 control-label">客户名称</label>
+ 	                        <div class="col-sm-10">
+ 	                          <input type="text" class="form-control" name="custom" value="" >
+ 	                        </div>
+ 	                  </div>
+ 	                  <div class="line"></div>
+
+
+
+ 	                  <div class="form-group">
+ 	                        <label class="col-sm-2 control-label">药品名称</label>
+ 	                        <div class="col-sm-10">
+ 	                          <input type="text" class="form-control" name="drug" value="" >
+ 	                        </div>
+ 	                  </div>
+ 	                  <div class="line"></div>
+
+
+ 	           
+ 	                  <div class="form-group">
+ 	                        <label class="col-sm-2 control-label">规格</label>
+ 	                        <div class="col-sm-10">
+ 	                          <input type="text" class="form-control" name="spec" value="" >
+ 	                        </div>
+ 	                  </div>
+ 	                  <div class="line"></div>
+
+ 	                  <div class="form-group">
+ 	                        <label class="col-sm-2 control-label">厂家</label>
+ 	                        <div class="col-sm-10">
+ 	                          <input type="text" class="form-control" name="factory" value="" >
+ 	                        </div>
+ 	                  </div>
+ 	                  <div class="line"></div>
+
+
+ 	                  <div class="form-group">
+ 	                        <label class="col-sm-2 control-label">数量</label>
+ 	                        <div class="col-sm-10">
+ 	                          <input type="text" class="form-control" name="num" value="" >
+ 	                        </div>
+ 	                  </div>
+ 	                  <div class="line"></div>
+
+
+
+ 	          <div class="form-group">
+ 	                
+ 	                <div class="col-sm-offset-2 col-sm-10">
+ 	                  <input type="submit" class="btn btn-info" value="保存" >
+ 	                  <a href="javascript:history.back();" class="btn btn-default">返回</a>
+ 	                </div>
+
+
+ 	          </div>
+
+ 	        </form>
+
+ 	  </div>
+ 	</div>
+
+
+
+
+ 	
+
+
+
+
+
+
+</div>	
+<script type="text/javascript" src="<?=base_url();?>../static/js/jquery.min.js"></script>
+<script type="text/javascript" src="<?=base_url();?>../static/layer/layer.js"></script>
+
+<script type="text/javascript">
+
+$(function(){
+
+
+   
+	$('#username_btn').click(function(){
+		//页面层
+		layer.open({
+		  type: 1,
+		  skin: 'layui-layer-rim', //加上边框
+		  area: ['420px', '240px'], //宽高
+		  title:'帐号详情',
+		  content:$('#username_box')
+		});
+	});
+    
+
+   
+});  
+</script>
+</body>
+</html>

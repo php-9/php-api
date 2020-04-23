@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="Cache-Control" content="no-transform" /> 
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<base href="<?=base_url('app/views/home/')?>">	
+	<title>数据管理系统登录</title>
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	
+
+	<link rel="stylesheet" href="<?=base_url();?>../static/bootstrap/css/bootstrap.min.css" >
+	
+	<style type="text/css">
+		body{
+			background: #f7f7f7;
+		}
+		.form-horizontal .form-group{
+				margin-right:0;
+			    margin-left:0;
+		}
+
+		.container-fluid {
+		    padding-right: 15px;
+		    padding-left: 15px;
+		    margin-right:0;
+		    margin-left:0;
+		    position: absolute;
+		    top:50%;
+		    left: 0;
+		    transform: translateY(-50%);
+		}
+
+		.panel{
+			margin-bottom: 0;
+		}
+
+		.col-6{
+			width: 50%;
+			float: left;
+			padding-left:15px;
+			padding-right:15px;
+		}
+
+		@media screen and (min-width:768px) {
+			.container-fluid {		
+			    left:50%;
+			    top:50%;
+			    transform: translate(-50%,-50%);
+			}
+		    .panel {
+		       width: 400px;
+		    }
+		}
+
+
+	</style>
+</head>
+<body>
+
+<div class="container-fluid" >	
+	<div class="panel panel-info">
+	  <div class="panel-heading"><i class="glyphicon glyphicon-knight"></i> 数据管理系统登录</div>	
+      <div class="panel-body" >
+      	<form class="form-horizontal" action="<?=site_url('login/pass'); ?>" method="post" enctype="multipart/form-data">
+      				
+      			<div class="form-group">
+      				<div class="input-group">
+      				  <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-user"></i></span>
+      				  <input type="text" class="form-control" placeholder="帐号" aria-describedby="basic-addon1" name="username">
+      				</div>
+      			</div>
+      			
+      			<div class="form-group">
+      				<div class="input-group">
+      				  <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-lock"></i></span>
+      				  <input type="password" class="form-control" placeholder="密码" aria-describedby="basic-addon1" name="password">
+      				</div>
+      			</div>
+
+      			<div class="form-group">
+      				<div class="row">
+      					<div class="col-6">
+      						<div class="input-group">
+      						  <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-flash"></i></span>
+      						  <input type="text" class="form-control" placeholder="验证码" aria-describedby="basic-addon1" name="code">
+      						</div>
+      					</div>
+      					<div class="col-6" style="text-align: right;">
+      						  <a  style=" display: inline-block; height:34px;border:1px solid #ccc;border-radius:4px; overflow: hidden;
+      						  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+      						  " 
+      						  href="javascript:;" title="换一个" onClick="document.getElementById('captcha_img').src='<?=site_url('login/captcha')?>?r='+Math.random()">
+      						 <img id="captcha_img" src="<?=site_url('login/captcha').'?r='.rand()?>" height="32">
+      						</a>
+      					</div>
+      				</div>
+      				
+      			</div>
+
+
+      		
+
+                <div class="form-group">                         
+                     
+                        <input type="submit" class="btn btn-primary btn-block" value="登录" >
+
+                </div>
+      	</form>	
+      </div>
+    </div>  	
+</div>	
+<script type="text/javascript" src="<?=base_url();?>../static/js/jquery.min.js"></script>
+<script type="text/javascript" src="<?=base_url();?>../static/layer/layer.js"></script>
+
+<script type="text/javascript">
+
+$(function(){
+
+
+   
+
+    
+
+   
+});  
+</script>
+</body>
+</html>

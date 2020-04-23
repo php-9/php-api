@@ -1,0 +1,14 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?/$1 [L]
+
+#改写httpd.ini为
+#[ISAPI_Rewrite]
+# 3600 = 1 hour
+#CacheClockRate 3600
+#RepeatLimit 32
+#如下为关键的地方，示例中static 下都有一些图片、CSS文件，如果不做排除，那么网页不能正常显示。如果您希望排除更多的目录，请在如下代码中增加，增加格式为(?!目录路径)。
+#RewriteRule /(?!static)(?!uploads)(?!app/views)(.*) /index.php/$1 [L]
+
+

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">	
+	<title></title>
+	<base href="<?=base_url('app/views/admin/')?>">
+	<link rel="stylesheet" href="<?=base_url();?>../static/bootstrap/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="css/admin.css" >	
+
+</head>
+<body>
+
+<div class="container-fluid">
+
+	<ol class="breadcrumb">
+	  <li class="active"><span class="glyphicon glyphicon-edit" ></span> 系统设置</li>
+	  <li class="active">参数修改</li>
+	  <li class="active"><?=$config['label']?></li>
+	</ol>
+
+	<div class="panel panel-default">	  	
+	  <div class="panel-body">
+	    <form class="form-horizontal" action="<?=admin_url('config/edit_pass/'.$config['id']);?>" method="post" enctype="multipart/form-data">
+
+
+		    <div class="form-group"  style="padding-top: 15px;">
+		      <label class="col-sm-2 control-label">类型</label>
+		      <div class="col-sm-10">
+		        <select class="form-control" name="type">
+		        	<option value="0">请选择</option>
+		        	<option value="text" <?=$config['type']=='text'? 'selected=selected': ''   ?> >单行文本</option>
+		        	<option value="textarea" <?=$config['type']=='textarea'? 'selected=selected': ''   ?>>多行文本</option>
+		        	<option value="boolean" <?=$config['type']=='boolean'? 'selected=selected': ''   ?>>单选按钮(二选一)</option>		        	
+		        	<option value="select" <?=$config['type']=='select'? 'selected=selected': ''   ?>>下拉列表</option>
+		        	<option value="img" <?=$config['type']=='img'? 'selected=selected': ''   ?>>图片</option>		        	
+		        </select>
+		      </div>
+		    </div>
+		    <div class="line"></div>
+		
+
+	      <div class="form-group">
+	        <label class="col-sm-2 control-label">参数说明</label>
+	        <div class="col-sm-10">
+	          <input type="text" class="form-control"  name="label" value="<?=$config['label']?>">
+	        </div>
+	      </div>
+	      <div class="line"></div>
+
+
+	      <div class="form-group" >
+	        <label class="col-sm-2 control-label">变量名</label>
+	        <div class="col-sm-10">
+	          <input type="text" class="form-control"  name="key" value="<?=$config['key']?>">
+	        </div>
+	      </div>
+	      <div class="line"></div>
+
+	      <div class="form-group" >
+	        <label class="col-sm-2 control-label">变量值</label>
+	        <div class="col-sm-10">
+	          <input type="text" class="form-control"  name="value" value="<?=$config['value']?>">
+	        </div>
+	      </div>
+	      <div class="line"></div>
+
+	      <div class="form-group" >
+	        <label class="col-sm-2 control-label">可选值</label>
+	        <div class="col-sm-10">
+	          <input type="text" class="form-control"  name="options"  value="<?=$config['options']?>">
+	        </div>
+	      </div>
+	      <div class="line"></div>
+
+	      
+
+	      <div class="form-group">
+	        <div class="col-sm-offset-2 col-sm-10">
+	          <button type="submit" class="btn btn-info">保存</button>
+	          <a href="javascript:history.back();" class="btn btn-default">返回</a>	        
+	        </div>
+	      </div>
+	    </form>
+	  </div>
+	</div>
+
+
+
+</div>
+
+<?php
+$this->load->view('admin/footer.htm');
+?>
+
+
+</body>
+</html>

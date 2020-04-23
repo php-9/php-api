@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">  
+  <title></title>
+  <base href="<?=base_url('app/views/admin/')?>">
+  <link rel="stylesheet" href="<?=base_url();?>../static/bootstrap/css/bootstrap.min.css" >
+  <link rel="stylesheet" href="css/admin.css" >
+  <style type="text/css">
+    .table>tbody>tr>td {
+        vertical-align: middle;
+        text-align: left;
+    }
+    .table>thead>tr>th {
+        vertical-align: middle;
+        text-align:left;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container-fluid">
+  <ol class="breadcrumb">
+    <li class="active"><span class="glyphicon glyphicon-list-alt" ></span> 系统设置</li>
+    <li class="active">参数列表</li>
+  </ol>
+  <a href="<?=admin_url('config/add');?>" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-plus-sign"></i> 添加</a>
+  <div class="panel panel-default">   
+          
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th>ID</th>              
+              <th>参数说明</th>
+              <th>变量名</th>
+              <th>变量值</th>     
+              <th>类型</th>
+              <th>标识</th>
+              <th>操作</th>           
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach($config as $v):?>
+              <tr>
+                <td><?=$v['id']?></td>
+                <td><?=$v['label']?></td>
+                <td><?=$v['key']?></td>
+                <td><?=$v['value']?></td>
+                <td><?=$v['type']?></td>
+                <td><?=$v['flag']==1 ? '内置':'扩展'?></td>
+                <td>
+                  <a href="<?=admin_url('config/edit/'.$v['id']);?>" title="修改" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-edit"></i></a> 
+                  <a href="<?=admin_url('config/del/'.$v['id']);?>" title="删除" onclick="return confirm('确认要删除？')" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-remove"></i></a>
+                </td>
+              </tr>
+             <?php endforeach;?> 
+            </tbody>
+          </table>
+    
+  </div>
+
+</div>
+
+
+
+<?php
+$this->load->view('admin/footer.htm');
+?>
+<script type="text/javascript" src="<?=base_url();?>../static/js/jquery.min.js"></script>
+<script type="text/javascript" src="<?=base_url();?>../static/layer/layer.js"></script>
+
+<script type="text/javascript">
+
+</script>
+
+</body>
+</html>

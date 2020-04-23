@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <base href="<?=base_url('app/views/admin/')?>">
+  <link rel="stylesheet" href="<?=base_url();?>../static/bootstrap/css/bootstrap.min.css" >
+  <link rel="stylesheet" href="css/admin.css" >
+
+</head>
+
+<body>
+
+<div class="container-fluid">
+
+  <ol class="breadcrumb">
+    <li class="active"><span class="glyphicon glyphicon-plus-sign" ></span> 用户管理</li>
+    <li class="active">添加用户</li>
+  </ol>
+  <div class="panel panel-default">    
+    <div class="panel-body">
+          <form class="form-horizontal" action="<?php echo admin_url('user/add_pass'); ?>" method="post" enctype="multipart/form-data">
+
+
+                    <div class="form-group">
+                          <label class="col-sm-2 control-label">帐号</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" name="username" value="" >
+                          </div>
+                    </div>
+                    <div class="line"></div>
+
+
+
+                    <div class="form-group">
+                          <label class="col-sm-2 control-label">密码</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" name="password" value="" >
+                          </div>
+                    </div>
+                    <div class="line"></div>
+
+
+             
+                    <div class="form-group">
+                          <label class="col-sm-2 control-label">姓名</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" name="realname" value="" >
+                          </div>
+                    </div>
+                    <div class="line"></div>
+
+                    <div class="form-group">
+                          <label class="col-sm-2 control-label">部门</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" name="department" value="" >
+                          </div>
+                    </div>
+                    <div class="line"></div>
+
+
+                    <div class="form-group">
+                          <label class="col-sm-2 control-label">职位</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" name="position" value="" >
+                          </div>
+                    </div>
+                    <div class="line"></div>
+
+
+                    
+
+
+                    <div class="form-group">
+                          <label class="col-sm-2 control-label">权限</label>
+                          <div class="col-sm-10">
+                            <select name="auth"  class="form-control" >
+                              <option value="1">上传者1</option>
+                              <option value="2">上传者2</option>
+                              <option value="3">查看者</option>                              
+                          </select>
+                          </div>
+                    </div>
+                    <div class="line"></div>
+
+
+
+          
+           
+     
+
+
+            <div class="form-group">
+                  
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <input type="submit" class="btn btn-info" value="保存" >
+                    <a href="javascript:history.back();" class="btn btn-default">返回</a>
+                  </div>
+
+
+            </div>
+
+          </form>
+
+    </div>
+  </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
+$this->load->view('admin/footer.htm');
+?>
+<script type="text/javascript" src="<?=base_url();?>../static/js/jquery.min.js"></script>
+<script type="text/javascript" src="<?=base_url();?>../static/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<?=base_url();?>../static/wangEditor/wangEditor.min.js"></script>
+<script type="text/javascript">
+
+    var E = window.wangEditor;
+        var editor = new E('#editor');
+        var $text1 = $('#editor1');
+        editor.customConfig.onchange = function (html) {
+            // 监控变化，同步更新到 textarea
+            $text1.val(html);
+        }
+        // 关闭粘贴样式的过滤
+      editor.customConfig.pasteFilterStyle = false
+        // 通过 url 参数配置 debug 模式。url 中带有 wangeditor_debug_mode=1 才会开启 debug 模式
+      editor.customConfig.debug = location.href.indexOf('wangeditor_debug_mode=1') > 0
+        // 配置服务器端地址
+      editor.customConfig.uploadImgServer = '<?=admin_url('upload/index')?>';
+      // 将图片大小限制为 1M
+    editor.customConfig.uploadImgMaxSize = 1 * 1024 * 1024;
+    editor.customConfig.uploadImgHeaders = {//上传图片时刻自定义设置 header
+        'Accept': 'text/x-json'
+    }
+    // 限制一次最多上传 1 张图片
+    editor.customConfig.uploadImgMaxLength = 1;
+    //自定义 fileName
+    editor.customConfig.uploadFileName = 'fileName';
+        editor.create();
+        $('#editor .w-e-text-container').css('height','500px');
+        // 初始化 textarea 的值
+        $text1.val(editor.txt.html());
+</script>
+<!-- 文本编辑器 -->
+<script type="text/javascript" src="<?=base_url();?>../static/layer/layer.js"></script>
+<script type="text/javascript">
+ $("input[name=name]").on('blur',function(){
+    if(($('input[name=name]').val()!='')){
+           //ajax栏目名称变拼音
+          $.getJSON("<?=admin_url('column/aj_cv_pinyin')?>",{str:$('input[name=name]').val()},function(res){
+             if(res.code==0){
+              $('input[name=dir]').val(res.data.pinyin+'/');
+             }else{
+              layer.msg(res.msg);
+             }
+             
+          });
+
+          //seo标题
+          $('input[name=seo_title]').val( $('input[name=name]').val() );
+          $('input[name=seo_kw]').val( $('input[name=name]').val() );
+          $('input[name=seo_desc]').val( $('input[name=name]').val() );
+     };
+ });
+</script>
+</body>
+</html>

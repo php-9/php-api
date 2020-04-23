@@ -1,0 +1,110 @@
+<?php
+$user=$_SESSION['user'];
+$u=$this->db->where('id',$user['id'])->get('user')->row_array();
+
+?>
+
+<nav class="navbar navbar-default">
+
+
+			<?php if($u['auth']==1):?>
+	      
+	        
+	        <ul class="nav navbar-nav text-info">
+	        		<!-- <li><a href="<?=site_url()?>">系统首页</a></li> -->
+	                <li>
+	                	<a href="<?=site_url('data1/add')?>"><span class="glyphicon glyphicon-plus-sign text-primary" ></span> 添加数据</a>
+	                </li>	              
+	                <li>
+	                	<a href="<?=site_url('data1')?>"><span class="glyphicon glyphicon-align-justify text-primary" ></span> 数据列表</a>
+	                </li>
+
+	               <!--  <li><a href="<?=site_url('data2')?>">数据表2</a></li>	 -->              
+	        </ul>
+	        <?php elseif($u['auth']==2):?>
+
+	        <ul class="nav navbar-nav text-info">
+	        		<!-- <li><a href="<?=site_url()?>">系统首页</a></li> -->
+	                <li>
+	                	<a href="<?=site_url('data2/add')?>"><span class="glyphicon glyphicon-plus-sign text-primary" ></span> 添加数据</a>
+	                </li>	              
+	                <li>
+	                	<a href="<?=site_url('data2')?>"><span class="glyphicon glyphicon-align-justify text-primary" ></span> 数据列表</a>
+	                </li>
+
+	               <!--  <li><a href="<?=site_url('data2')?>">数据表2</a></li>	 -->              
+	        </ul>
+
+	        <?php elseif($u['auth']==3):?>
+	        <ul class="nav navbar-nav text-info">
+	        		<!-- <li><a href="<?=site_url()?>">系统首页</a></li> -->
+	               	              
+	                <li>
+	                	<a href="<?=site_url('data_reader/index')?>"><span class="glyphicon glyphicon-align-justify text-primary" ></span> 数据列表1</a>
+	                </li>
+	                <li>
+	                	<a href="<?=site_url('data_reader/index2')?>"><span class="glyphicon glyphicon-align-justify text-primary" ></span> 数据列表2</a>
+	                </li>
+
+	               <!--  <li><a href="<?=site_url('data2')?>">数据表2</a></li>	 -->              
+	        </ul>
+
+	        <?php else:?>
+
+
+	        <?php endif;?>
+
+	        <ul class="nav navbar-nav pull-right">
+
+	        		<li>
+	        			<a href="<?=site_url('login/logout')?>" onclick="return confirm('确认要退出帐号？')">
+	        				<span class="glyphicon glyphicon-send" ></span> 退出
+	        			</a>
+	        		</li>
+	        		<li><a href="<?=site_url('user/edit_pwd')?>"><span class="glyphicon glyphicon-lock" ></span> 密码修改</a></li>	        			        		
+	                <li>
+	                	<a id="username_btn" href="javascript:;" title="帐号详情">
+	                		<span class="glyphicon glyphicon-user" ></span> 
+	                		帐号：<?=$u['username']?></a>
+	                </li>	              
+	        </ul>
+	      
+</nav>
+
+
+
+<div id="username_box" style="display: none;padding:15px;">
+<style type="text/css">
+	#username_box ul{
+		padding: 0;
+		margin:0;
+	}
+	#username_box li{
+		list-style-type: none;
+		line-height: 2em;
+		border-bottom: 1px dashed #eee;
+	}
+</style>	
+	    	<ul>
+	    		<li><strong>帐号：</strong> <?=$u['username']?></li>
+	    		<li><strong>姓名：</strong> <?=$u['realname']?></li>
+	    		<li><strong>部门：</strong> <?=$u['department']?></li>
+	    		<li><strong>职位：</strong> <?=$u['position']?></li>
+	    		<li><strong>权限：</strong> 
+	    			<?php
+
+	    			if($user['auth']==1){
+	    				echo '上传者1';
+	    			}elseif($user['auth']==2){
+	    				echo '上传者2';
+	    			}elseif($user['auth']==3){
+	    				echo '查看者';
+	    			}
+
+
+	    			?>
+	    		</li>
+	    	</ul>
+
+	
+</div> 

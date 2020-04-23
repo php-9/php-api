@@ -1,0 +1,51 @@
+body{
+	text-decoration: none;
+	font-family: "Microsoft Yahei",Tahoma, Arial;
+	
+}
+
+.table>thead>tr>th{
+	font-size: 12px;
+	vertical-align: middle;
+	text-align: left;
+	
+}
+.table>tbody>tr>td{
+	font-size: 12px;
+	vertical-align: middle;
+	text-align: left;
+	
+}
+.container-fluid {
+    padding-top: 15px;  	   
+}
+.line2{
+    border-top: 1px dashed #ddd;
+    color: #ffffff;
+    background-color: #ffffff;
+    height: 0;
+    margin:0;
+    margin-bottom: 15px;
+
+}
+
+.line{
+    border-top: 1px dashed #ddd;
+    color: #ffffff;
+    background-color: #ffffff;
+    height: 1px;
+    margin:15px 0;
+}
+
+
+.orderon{
+  color:#f60
+}
+
+.orderoff{
+  color:#ccc
+}
+
+
+
+
