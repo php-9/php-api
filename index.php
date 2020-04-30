@@ -3,8 +3,8 @@
 //预检请求缓存有效期,秒
 header("Access-Control-Max-Age: 86400");
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: *");
-header("Access-Control-Allow-Methods: *");
+header("Access-Control-Allow-Headers: token,authorization,Authorization,DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS,PUT,DELETE");
 
 if($_SERVER['REQUEST_METHOD']=='OPTIONS'){					
 	exit('OPTIONS');

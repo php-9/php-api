@@ -9,7 +9,31 @@ class User extends Api_Controller {
 	}
 	public function index(){	
 		
-		$this->success($this->userInfo);
+		// $this->db->insert('admin',array(
+		// 	'username'=>'a'.mt_rand(1000,9999),
+		// 	'addTime'=>time(),
+		// 	'password'=>'asdfasdas'
+		// 	));
+		// 	
+		$res=[];
+		$res['pageNum']=$this->payload('pageNum') ? $this->payload('pageNum') : 1;
+		//每页有多少行数据
+		$res['pageSize']=$this->payload('pageSize') ? $this->payload('pageSize'): 10;
+		
+
+		$res['list']=$this->db	    
+						->limit( $res['pageSize'], ($res['pageNum']-1)*$res['pageSize'] )		
+						->get('admin')
+						->result_array();
+
+		$res['pageTotal']=$this->db	    
+								
+							->get('admin')
+							->num_rows();
+
+
+		
+		$this->success($res);
 		
 		
 	}
@@ -97,6 +121,22 @@ class User extends Api_Controller {
 
 		$this->fail('帐号密码错误！');
 
+	}
+
+	//帐号状态
+	public function  status(){
+		//更新状态
+		if($_SERVER['REQUEST_METHOD']=='PUT'){
+			$uid=$this->payload('id');
+			$data=[];
+			$data['status']=$this->payload('status');
+			if($this->db->where('id',$uid)->update('admin',$data)){
+				$this->success([],200,'数据更新成功');
+			}
+			
+		}
+
+		$this->fail('操作失败！');
 	}
 
 
