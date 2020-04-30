@@ -5,18 +5,16 @@ class Api_Controller extends CI_Controller{
 
 	protected $noNeedLogin = [];//无需登录的方法
 
-	protected $loginUser=[];//登录用户
+	protected $userInfo=[];//登录用户
 
 	public function __construct(){
 
 		parent::__construct();
 		//启用文件缓存
 		$this->load->driver('cache',array('adapter' => 'apc', 'backup' => 'file', 'key_prefix' => 'my_'));
-		
+
 		if( !in_array( strtolower($this->router->fetch_method()) , $this->noNeedLogin ) ){//登录
-			if(!$this->isLogin()){
-				$this->fail('未登录',505);
-			}
+			$this->doLogin();
 		}
 	}
 
@@ -43,27 +41,45 @@ class Api_Controller extends CI_Controller{
 
 
 	//验证登录
-	protected function isLogin() {
+	protected function doLogin() {
 		$this->load->library('jwt');
 
 		if( empty($_SERVER['HTTP_TOKEN']) ){
-			$this->fail('token找不到');
+			$this->fail('token无法获取');
 		}
 
 		$uid=$this->jwt->verifyToken($_SERVER['HTTP_TOKEN']);
 
-		if($uid){//jwt校验成功
-			
-			if( $this->db->where('uid',$uid)->where('token',$_SERVER['HTTP_TOKEN'])->get('user_token')->row_array() ){//校验登录列表token
-
-				$this->loginUser['id']=$uid;
-				return true;
-			}
-			
-			
+		//jwt校验
+		if(!$uid){
+			$this->fail('请登录',501);
 		}
+
+		//数据库token校验
+		if( !$u = $this->db->where('u_id',$uid)->where('token',$_SERVER['HTTP_TOKEN'])->get('admin_session')->row_array()){
+			$this->fail('此帐号已在别处登录',502);
+		}
+
 		
-		return false;
+		$this->userInfo['id']=$uid;
+		$this->userInfo['username']=$u['username'];				
+		
+	}
+
+
+	//获取playload数据
+	//axios默认发送的payload,要用php://input获取
+	public function payload($index){
+		// 获取payload json数据，转换成数组形式
+		$postData = file_get_contents('php://input');
+		$requests = !empty($postData) ? json_decode($postData, true) : array();
+
+		if(isset($requests[$index])){
+			return $requests[$index];
+		}
+
+		return NULL;
+		
 	}
 
 
