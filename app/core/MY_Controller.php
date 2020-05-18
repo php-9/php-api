@@ -83,6 +83,38 @@ class Api_Controller extends CI_Controller{
 	}
 
 
+	/*无限分类列表*/
+	public function _list($arr,$pid=0,$level=0){
+
+		static $res=array();
+		foreach ($arr as $v) {
+			if($v['pid']==$pid){
+				$v['level']=$level;
+				$res[]=$v;
+				$this->_list($arr,$v['id'],$level+1);
+			}
+		}
+		return $res;
+	}
+
+	/*无限分类树*/
+	public function _tree($arr,$pid=0,$level=0){
+
+		$res=[];
+		foreach ($arr as $k => $v) {
+			if ($v['pid'] == $pid){
+                 $v['level']=$level;
+                 
+                 $v['child']=$this->_tree($arr,$v['id'],$level+1);
+                 $res[]=$v;              
+            }
+		}
+		return $res;
+
+
+	}
+
+
 	
 
 	

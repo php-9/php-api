@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class User extends Api_Controller {
 
-	protected $noNeedLogin=['login'];
+	protected $noNeedLogin=['login','code','verify_code'];
 	public function __construct(){
 		parent::__construct();					
 	}
@@ -38,43 +38,59 @@ class User extends Api_Controller {
 		
 	}
 
-	public function reg(){
+	//获取用户
+	public function row(){
+		$id=$this->payload('id');
+		$user=$this->db->where('id',$id)->get('admin')->row_array();
+		$this->success($user);
+
+	}
+
+	//添加用户
+	public function add(){
+		$username=$this->payload('username');
+		$password=$this->payload('password');
+
+		if(!$username){
+			$this->fail('请输入帐号');
+		}
+
+		if(!$password){
+			$this->fail('请输入密码');
+		}
+
+		if($this->db->where('username',$username)->get('admin')->row_array()){
+			$this->fail('帐号已存在');
+		}
+
+		if($this->db->insert('admin',['username'=>$username,'password'=>$password,'create_time'=>time()])){
+			$this->success([],200);
+		}
+
+		$this->fail('添加失败');
 		
-	}
-
-	//登录
-	public function login111(){
-		$this->load->library('user_agent');//浏览器信息
-		$this->load->library('jwt');
-		
-		$uid = 111;
-
-
-		//删除当前用户之前token
-		$this->db->where('uid',$uid)->delete('user_token');
-
-		$token = $this->jwt->getToken($uid);//生成token
-
-		$data['uid']=$uid;
-		$data['token']=$token;
-		$data['ip']=$this->input->ip_address();
-		$data['agent']=$this->agent->browser().','.$this->agent->version();
-		$data['addTime']=time();
-
-		var_dump($data);
-		$this->db->insert('user_token',$data);
-
-
-		//登录日志记录
-		$this->db->insert('user_login_log',$data);
-	}
-
-	//退出登录
-	public function logout(){
-
-		$this->db->where('uid',$this->loginUser['id'])->delete('user_token');
 
 	}
+
+
+	//编辑用户
+	public function edit(){
+		$id=$this->payload('id');
+		$user=$this->db->where('id',$id)->get('admin')->row_array();
+		$this->success($user);
+
+	}
+
+
+	//删除用户
+	public function del(){
+		$id=$this->payload('id');
+		$user=$this->db->where('id',$id)->get('admin')->row_array();
+		$this->success($user);
+
+	}
+
+	
 
 	//登录 
 	public function login(){
@@ -137,6 +153,74 @@ class User extends Api_Controller {
 		}
 
 		$this->fail('操作失败！');
+	}
+
+
+	/////////
+	//验证码 //
+	/////////
+	public function code(){
+
+		//$id=$this->input->get('id');
+		//唯一id
+		$uni=md5(uniqid(md5(microtime(true)),true));
+
+		//缓存数据
+		//$this->cache->save($uni, '这是验证码', 300);
+		//
+		//$this->cache->get('3ef7d8ab3a3e35b60cb3b771f6caf7c6');
+		$data['verify_uni']=$uni;
+		$data['verify_url']=base_url().'uploads/verify_code/'.$uni.'.jpg';		
+
+		$this->verify_code($uni);//生成验证码图片
+
+		$this->success($data);
+
+	}
+
+
+	//验证码
+	private function verify_code($uni=''){
+		//创建一个大小为 150*38 的验证码  
+		$image = imagecreatetruecolor(126, 32);  
+		$bgcolor = imagecolorallocate($image, 255, 255, 255);  
+		imagefill($image, 0, 0, $bgcolor);  
+		  
+		$captch_code = '';  
+		for ($i = 0; $i < 4; $i++) {  
+		    $fontsize = 5;  
+		    $fontcolor = imagecolorallocate($image, rand(0, 160), rand(0, 160), rand(0, 160));  
+		    $data = 'abcdefghjkmnpqrstuvwxy23456789';  
+		    $fontcontent = substr($data, rand(0, strlen($data) - 1), 1);
+		    $captch_code .= $fontcontent;  
+		    $x = $i * 126 / 4 + rand(5,8);//($i * 150 / 4) + rand(5, 10);  
+		    $y = rand(22, 25);  
+		    //imagestring($image, $fontsize, $x, $y, $fontcontent, $fontcolor); 
+		    $size=rand(16,22);
+		    imagefttext($image, $size , 0,  $x, $y, $fontcolor, realpath('./static/captcha/CharlemagneStd-Bold.otf'),$fontcontent); 
+		}  
+
+
+		//就生成的验证码保存到session  
+		$this->cache->save($uni, $captch_code, 300);		  
+		 
+		//在图片上增加点干扰元素  
+		for ($i = 0; $i < 200; $i++) {  
+		    $pointcolor = imagecolorallocate($image, rand(180, 200), rand(180, 200), rand(180, 200));  
+		    imagesetpixel($image, rand(1, 149), rand(1, 37), $pointcolor);  
+		}  
+		  
+		//在图片上增加线干扰元素  
+		for ($i = 0; $i < 3; $i++) {  
+		    $linecolor = imagecolorallocate($image, rand(180, 220), rand(180, 220), rand(180, 220));  
+		    imageline($image, rand(1, 149), rand(1, 37), rand(1, 149), rand(1, 37), $linecolor);  
+		}
+
+		
+		//设置头  
+		header('content-type:image/png');  
+		imagepng($image,'./uploads/verify_code/'.$uni.'.jpg');  
+		imagedestroy($image);
 	}
 
 
