@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : aaa
-Source Server Version : 50553
-Source Host           : localhost:3306
-Source Database       : membersys
+Source Server         : 127.0.0.1
+Source Server Version : 50726
+Source Host           : 127.0.0.1:3306
+Source Database       : api
 
 Target Server Type    : MYSQL
-Target Server Version : 50553
+Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2020-03-26 16:29:32
+Date: 2020-05-24 13:45:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,14 +23,49 @@ CREATE TABLE `ding_admin` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
+  `create_time` int(10) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT '1',
+  `group_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of ding_admin
 -- ----------------------------
-INSERT INTO `ding_admin` VALUES ('4', 'admin', '21232f297a57a5a743894a0e4a801fc3');
-INSERT INTO `ding_admin` VALUES ('5', 'a123456', 'e10adc3949ba59abbe56e057f20f883e');
+INSERT INTO `ding_admin` VALUES ('4', 'admin', '21232f297a57a5a743894a0e4a801fc3', '1', '0', null);
+INSERT INTO `ding_admin` VALUES ('5', 'a123456', 'e10adc3949ba59abbe56e057f20f883e', '1', '1', null);
+INSERT INTO `ding_admin` VALUES ('6', 'a7019', 'asdfasdas', '1588229437', '1', null);
+INSERT INTO `ding_admin` VALUES ('7', 'a3731', 'asdfasdas', '1588229459', '1', null);
+INSERT INTO `ding_admin` VALUES ('8', 'a7650', 'asdfasdas', '1588229462', '1', null);
+INSERT INTO `ding_admin` VALUES ('9', 'a7186', 'asdfasdas', '1588229464', '1', null);
+INSERT INTO `ding_admin` VALUES ('10', 'a3454', 'asdfasdas', '1588229473', '1', null);
+INSERT INTO `ding_admin` VALUES ('11', 'a8516', 'asdfasdas', '1588229476', '1', null);
+INSERT INTO `ding_admin` VALUES ('12', 'a3430', 'asdfasdas', '1588229478', '1', null);
+INSERT INTO `ding_admin` VALUES ('13', 'a6407', 'asdfasdas', '1588229479', '0', null);
+INSERT INTO `ding_admin` VALUES ('14', 'a5287', 'asdfasdas', '1588229481', '1', null);
+INSERT INTO `ding_admin` VALUES ('15', 'a2901', 'asdfasdas', '1588229483', '1', null);
+INSERT INTO `ding_admin` VALUES ('16', 'a5382', 'asdfasdas', '1588229485', '1', null);
+INSERT INTO `ding_admin` VALUES ('17', 'a2656', 'asdfasdas', '1588229492', '1', null);
+INSERT INTO `ding_admin` VALUES ('18', 'a2134', 'asdfasdas', '1588229494', '1', null);
+INSERT INTO `ding_admin` VALUES ('19', 'a2797', 'asdfasdas', '1588229496', '1', null);
+INSERT INTO `ding_admin` VALUES ('20', 'a1018', 'asdfasdas', '1588229498', '1', null);
+INSERT INTO `ding_admin` VALUES ('22', 'admmm', 'admmm888', '1588572498', '1', null);
+INSERT INTO `ding_admin` VALUES ('23', 'admin2', 'admmm888', '1588572713', '1', null);
+
+-- ----------------------------
+-- Table structure for `ding_admin_group`
+-- ----------------------------
+DROP TABLE IF EXISTS `ding_admin_group`;
+CREATE TABLE `ding_admin_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `rules` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of ding_admin_group
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `ding_admin_log`
@@ -38,26 +73,131 @@ INSERT INTO `ding_admin` VALUES ('5', 'a123456', 'e10adc3949ba59abbe56e057f20f88
 DROP TABLE IF EXISTS `ding_admin_log`;
 CREATE TABLE `ding_admin_log` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
+  `u_id` int(11) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   `ip` varchar(255) DEFAULT NULL,
-  `con` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
   `type` tinyint(1) DEFAULT NULL,
   `addtime` int(10) DEFAULT NULL,
   `agent` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ding_admin_log
 -- ----------------------------
-INSERT INTO `ding_admin_log` VALUES ('17', 'admin', '127.0.0.1', '成功登录', '1', '1585204622', 'Chrome,69.0.3497.100');
-INSERT INTO `ding_admin_log` VALUES ('18', 'admin', '127.0.0.1', '成功登录', '1', '1585204746', 'Chrome,69.0.3497.100');
-INSERT INTO `ding_admin_log` VALUES ('19', 'admin', '127.0.0.1', '数据表1 (id:1)编辑', '3', '1585209767', 'Chrome,69.0.3497.100');
-INSERT INTO `ding_admin_log` VALUES ('20', 'admin', '127.0.0.1', '数据表1 (id:2)删除', '3', '1585210004', 'Chrome,69.0.3497.100');
-INSERT INTO `ding_admin_log` VALUES ('21', 'admin', '127.0.0.1', '数据表1 (id:3)编辑', '3', '1585210209', 'Chrome,69.0.3497.100');
-INSERT INTO `ding_admin_log` VALUES ('22', 'admin', '127.0.0.1', '数据表2 (id:4)编辑', '3', '1585210575', 'Chrome,69.0.3497.100');
-INSERT INTO `ding_admin_log` VALUES ('23', 'admin', '127.0.0.1', '成功登录', '1', '1585210750', 'Chrome,78.0.3904.70');
-INSERT INTO `ding_admin_log` VALUES ('24', 'admin', '127.0.0.1', '成功登录', '1', '1585210769', 'Chrome,69.0.3497.100');
+INSERT INTO `ding_admin_log` VALUES ('17', null, 'admin', '127.0.0.1', '成功登录', '1', '1585204622', 'Chrome,69.0.3497.100');
+INSERT INTO `ding_admin_log` VALUES ('18', null, 'admin', '127.0.0.1', '成功登录', '1', '1585204746', 'Chrome,69.0.3497.100');
+INSERT INTO `ding_admin_log` VALUES ('19', null, 'admin', '127.0.0.1', '数据表1 (id:1)编辑', '3', '1585209767', 'Chrome,69.0.3497.100');
+INSERT INTO `ding_admin_log` VALUES ('20', null, 'admin', '127.0.0.1', '数据表1 (id:2)删除', '3', '1585210004', 'Chrome,69.0.3497.100');
+INSERT INTO `ding_admin_log` VALUES ('21', null, 'admin', '127.0.0.1', '数据表1 (id:3)编辑', '3', '1585210209', 'Chrome,69.0.3497.100');
+INSERT INTO `ding_admin_log` VALUES ('22', null, 'admin', '127.0.0.1', '数据表2 (id:4)编辑', '3', '1585210575', 'Chrome,69.0.3497.100');
+INSERT INTO `ding_admin_log` VALUES ('23', null, 'admin', '127.0.0.1', '成功登录', '1', '1585210750', 'Chrome,78.0.3904.70');
+INSERT INTO `ding_admin_log` VALUES ('24', null, 'admin', '127.0.0.1', '成功登录', '1', '1585210769', 'Chrome,69.0.3497.100');
+INSERT INTO `ding_admin_log` VALUES ('25', null, 'admin', '127.0.0.1', '成功登录', '1', '1588184474', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('26', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588184732', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('27', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588185058', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('28', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588185077', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('29', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588185103', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('30', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588185206', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('31', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588187696', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('32', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588187947', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('33', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588189072', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('34', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588190512', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('35', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588191323', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('36', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588191408', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('37', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588192094', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('38', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588192216', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('39', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588192406', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('40', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588192432', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('41', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588192463', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('42', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588192638', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('43', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588192776', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('44', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588192851', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('45', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588193151', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('46', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588193253', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('47', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588193757', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('48', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588193763', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('49', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588193766', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('50', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588193766', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('51', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588193767', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('52', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588193768', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('53', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588193768', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('54', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588193769', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('55', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588193770', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('56', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588193771', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('57', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588193777', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('58', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588193801', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('59', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588193827', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('60', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588193828', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('61', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588193829', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('62', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588193856', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('63', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588193904', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('64', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588193934', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('65', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588193935', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('66', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588193936', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('67', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588193937', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('68', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588193939', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('69', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588193940', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('70', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588193942', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('71', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588193987', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('72', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588211395', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('73', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588213795', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('74', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588214587', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('75', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588228478', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('76', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588229458', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('77', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588229473', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('78', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588231521', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('79', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588236461', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('80', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588236750', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('81', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588246450', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('82', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588248874', 'Internet Explorer,11.0');
+INSERT INTO `ding_admin_log` VALUES ('83', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588249107', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('84', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588385850', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('85', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588386054', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('86', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588386202', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('87', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588411694', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('88', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588558001', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('89', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588565559', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('90', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588567277', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('91', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588640249', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('92', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588643903', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('93', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588644328', 'Internet Explorer,11.0');
+INSERT INTO `ding_admin_log` VALUES ('94', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588644406', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('95', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588655113', 'Internet Explorer,11.0');
+INSERT INTO `ding_admin_log` VALUES ('96', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588655141', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('97', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588659272', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('98', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588659418', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('99', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588660983', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('100', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588662643', 'Internet Explorer,11.0');
+INSERT INTO `ding_admin_log` VALUES ('101', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588662686', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('102', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588672198', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('103', '4', 'admin', '127.0.0.1', '成功登录', '1', '1588992088', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('104', '4', 'admin', '127.0.0.1', '成功登录', '1', '1589006885', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('105', '4', 'admin', '127.0.0.1', '成功登录', '1', '1589795921', 'Chrome,78.0.3904.108');
+
+-- ----------------------------
+-- Table structure for `ding_admin_rule`
+-- ----------------------------
+DROP TABLE IF EXISTS `ding_admin_rule`;
+CREATE TABLE `ding_admin_rule` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pid` int(11) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `path` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `group_id` int(11) DEFAULT NULL,
+  `is_menu` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of ding_admin_rule
+-- ----------------------------
+INSERT INTO `ding_admin_rule` VALUES ('1', '0', '帐号管理', null, null, '1');
+INSERT INTO `ding_admin_rule` VALUES ('2', '1', '帐号列表', 'admin/index', null, '0');
+INSERT INTO `ding_admin_rule` VALUES ('3', '1', '添加帐户', 'admin/add', null, '0');
+INSERT INTO `ding_admin_rule` VALUES ('4', '1', '编辑帐户', 'admin/edit', null, '0');
+INSERT INTO `ding_admin_rule` VALUES ('5', '0', '订单管理', null, null, '0');
 
 -- ----------------------------
 -- Table structure for `ding_admin_session`
@@ -65,15 +205,17 @@ INSERT INTO `ding_admin_log` VALUES ('24', 'admin', '127.0.0.1', '成功登录',
 DROP TABLE IF EXISTS `ding_admin_session`;
 CREATE TABLE `ding_admin_session` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `session_id` varchar(255) DEFAULT NULL,
+  `token` varchar(255) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
   `u_id` int(11) DEFAULT NULL,
   `addtime` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ding_admin_session
 -- ----------------------------
+INSERT INTO `ding_admin_session` VALUES ('77', 'eyJleHAiOjE1OTA0MDA3MjEsInVpZCI6IjQifQ.7c72488481b107e12b37ddaf7c12df7c406ccfddbc5c587978c8970ef0bcc8c0', 'admin', '4', '1589795921');
 
 -- ----------------------------
 -- Table structure for `ding_archive`
@@ -348,39 +490,6 @@ INSERT INTO `ding_mo_pro` VALUES ('31', 'AM-MP84222', 'AMOMEI', '4单声道，2�
 INSERT INTO `ding_mo_pro` VALUES ('32', 'AM-MP84222', 'AMOMEI', '4单声道，2个立体声 # 每通道3段EQ均衡器 #60MM推子 # AUX，1组返N，2编组，1组立体声输出 # 内置DSP数字效果器 # 7频段图示均衡器 # 内置髙品质USB播放器带M示 # MP3录音功能 # 蓝牙显示器 # +48V幻象电源 #  尺寸LXWXH(长宽高）：345X385X 110mm #  净重：3.5KG', 'http://127.0.0.50/uploads/20200112/5e1b066e2282137831.jpg,http://127.0.0.50/uploads/20200112/5e1b066e237c140827.jpg,http://127.0.0.50/uploads/20200112/5e1b066e237c145507.jpg,http://127.0.0.50/uploads/20200112/5e1b066e237c168625.jpg,http://127.0.0.50/uploads/20200112/5e1b066e237c158254.jpg', '<p xss=\"removed\" style=\"text-align: center;\"><img src=\"http://127.0.0.50/./uploads/20200112/183cb68a7f8c5eb3ee166820105daefe.jpg\" xss=\"removed\"><br></p><p><br></p>', '<p xss=\"removed\" style=\"text-align: center;\"><img src=\"http://127.0.0.50/./uploads/20200112/38e27de735053b079d678d0f085065bb.jpg\" xss=\"removed\"><br></p><p><br></p>', '<p style=\"margin: 0pt; padding: 0pt; color: rgb(102, 102, 102); font-family: 微软雅黑; text-indent: 0pt; vertical-align: baseline; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\"><span style=\"font-family: Arial, Helvetica, sans-serif; color: rgb(255, 102, 0); letter-spacing: 0pt; font-size: 16px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\"><br></span></p><p style=\"margin: 0pt; padding: 0pt; color: rgb(102, 102, 102); font-family: 微软雅黑; text-indent: 0pt; vertical-align: baseline; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\"><span style=\"font-family: Arial, Helvetica, sans-serif; color: rgb(255, 102, 0); letter-spacing: 0pt; font-size: 16px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\"><br></span></p><p style=\"margin: 0pt; padding: 0pt; color: rgb(102, 102, 102); font-family: 微软雅黑; text-indent: 0pt; vertical-align: baseline; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\"><span style=\"font-family: Arial, Helvetica, sans-serif; color: rgb(255, 102, 0); letter-spacing: 0pt; font-size: 16px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">问：Maker如何引用？</span><br><span style=\"font-family: Arial, Helvetica, sans-serif; color: rgb(51, 51, 51); letter-spacing: 0pt; font-size: 16px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">答：我们将根据最低订货量（MOQ）提供FOB价格。</span></p><p style=\"margin: 0pt; padding: 0pt; color: rgb(102, 102, 102); font-family: 微软雅黑; text-indent: 0pt; vertical-align: baseline; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\"><span style=\"font-family: Arial, Helvetica, sans-serif; color: rgb(255, 102, 0); letter-spacing: 0pt; font-size: 16px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">问：我怎样才能得到你的报价？</span><br><span style=\"font-family: Arial, Helvetica, sans-serif; color: rgb(51, 51, 51); letter-spacing: 0pt; font-size: 16px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">答：请提供以下信息：</span><br><span style=\"font-family: Arial, Helvetica, sans-serif; color: rgb(51, 51, 51); letter-spacing: 0pt; font-size: 16px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">1.项目编号。</span><br><span style=\"font-family: Arial, Helvetica, sans-serif; color: rgb(51, 51, 51); letter-spacing: 0pt; font-size: 16px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">2.数量。</span><br><span style=\"font-family: Arial, Helvetica, sans-serif; color: rgb(51, 51, 51); letter-spacing: 0pt; font-size: 16px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">3.公司简介（姓名，电话，传真，地址和网页）</span><br><span style=\"font-family: Arial, Helvetica, sans-serif; color: rgb(51, 51, 51); letter-spacing: 0pt; font-size: 16px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">4.任何其他相关细节。</span></p><p style=\"margin: 0pt; padding: 0pt; color: rgb(102, 102, 102); font-family: 微软雅黑; text-indent: 0pt; vertical-align: baseline; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\"><span style=\"font-family: Arial, Helvetica, sans-serif; color: rgb(255, 102, 0); letter-spacing: 0pt; font-size: 16px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">问：下订单后的交货时间有多长？</span><br><span style=\"font-family: Arial, Helvetica, sans-serif; color: rgb(51, 51, 51); letter-spacing: 0pt; font-size: 16px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">答：提前期取决于许多因素，例如库存和生产状态。通常，样品订单大约需要2~3个工作日，大宗订单大约需要7到14个工作日。</span></p><p style=\"margin: 0pt; padding: 0pt; color: rgb(102, 102, 102); font-family: 微软雅黑; text-indent: 0pt; vertical-align: baseline; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\"><span style=\"font-family: Arial, Helvetica, sans-serif; color: rgb(255, 102, 0); letter-spacing: 0pt; font-size: 16px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">问：交货时间有多长？</span><br><span style=\"font-family: Arial, Helvetica, sans-serif; color: rgb(51, 51, 51); letter-spacing: 0pt; font-size: 16px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">- 答：我们从广东发送我们的货物，交货时间取决于您的送货地址，运输方式将是快递服务，海运，空运为您参考。</span></p><p style=\"margin: 0pt; padding: 0pt; color: rgb(102, 102, 102); font-family: 微软雅黑; text-indent: 0pt; vertical-align: baseline; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\"><span style=\"font-family: Arial, Helvetica, sans-serif; color: rgb(255, 102, 0); letter-spacing: 0pt; font-size: 16px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">问：你的标准包装是什么？</span><br><span style=\"font-family: Arial, Helvetica, sans-serif; color: rgb(51, 51, 51); letter-spacing: 0pt; font-size: 16px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">- 答：泡沫包装内部和纸箱包装外。</span></p><p style=\"margin: 0pt; padding: 0pt; color: rgb(102, 102, 102); font-family: 微软雅黑; text-indent: 0pt; vertical-align: baseline; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\"><span style=\"font-family: Arial, Helvetica, sans-serif; color: rgb(255, 102, 0); letter-spacing: 0pt; font-size: 16px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">问：您能为客户做OEM / ODM吗？</span><br><span style=\"font-family: Arial, Helvetica, sans-serif; color: rgb(51, 51, 51); letter-spacing: 0pt; font-size: 16px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">答：是的，从产品设计到包装，我们的工程师可以根据您的要求进行设计。如果您的订单数量良好，可以使用任何类型的徽标印刷或设计。</span></p><p><br></p>', '<p xss=\"removed\" style=\"text-align: center;\"><img src=\"http://127.0.0.50/./uploads/20200112/d3f1f66d4ad256d5a8a005445289486b.jpg\" xss=\"removed\"><br></p><p><br></p>');
 
 -- ----------------------------
--- Table structure for `ding_session`
--- ----------------------------
-DROP TABLE IF EXISTS `ding_session`;
-CREATE TABLE `ding_session` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `session_id` varchar(255) DEFAULT NULL,
-  `u_id` int(11) DEFAULT NULL,
-  `addtime` int(10) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of ding_session
--- ----------------------------
-INSERT INTO `ding_session` VALUES ('9', '3h5ao8i2derrvvobeuhge8nhe1', '1', '1585210967');
-
--- ----------------------------
--- Table structure for `ding_token`
--- ----------------------------
-DROP TABLE IF EXISTS `ding_token`;
-CREATE TABLE `ding_token` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `uid` int(11) NOT NULL,
-  `token` varchar(255) NOT NULL,
-  `add_time` int(10) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of ding_token
--- ----------------------------
-
--- ----------------------------
 -- Table structure for `ding_user`
 -- ----------------------------
 DROP TABLE IF EXISTS `ding_user`;
@@ -404,3 +513,95 @@ INSERT INTO `ding_user` VALUES ('1', '黄大小', '销售部', '业务员', 'a12
 INSERT INTO `ding_user` VALUES ('2', '李小春', '市场部', '设计员', 'a123458', 'e10adc3949ba59abbe56e057f20f883e', '2', '1585120074', '0');
 INSERT INTO `ding_user` VALUES ('3', '李天一', '总经办', '人事总监', 'a123459', 'e10adc3949ba59abbe56e057f20f883e', '3', '1585120118', '0');
 INSERT INTO `ding_user` VALUES ('4', '准备删除', '工厂部', '工人', 'a1111111', 'e10adc3949ba59abbe56e057f20f883e', '2', '1585172179', '1');
+
+-- ----------------------------
+-- Table structure for `ding_user_login_log`
+-- ----------------------------
+DROP TABLE IF EXISTS `ding_user_login_log`;
+CREATE TABLE `ding_user_login_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `addTime` int(10) NOT NULL,
+  `ip` varchar(255) DEFAULT NULL,
+  `agent` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ding_user_login_log
+-- ----------------------------
+INSERT INTO `ding_user_login_log` VALUES ('24', '111', 'eyJleHAiOjE1ODY4NjQzOTcsImlhdCI6MTU4NjYwNTE5NywidWlkIjoxMTF9.652cc537f9d32543a6199e6097dd152bbcdd3e3a23d5d6dd70f5a63fe6411dbb', '1586605197', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('25', '111', 'eyJleHAiOjE1ODcyMTA0NjIsInVpZCI6MTExfQ.33256e7433c3e9e0c5e61fe190fc461e82c180378d3f22afa6a2042e85a0de03', '1586605662', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('26', '111', 'eyJleHAiOjE1ODcyMTA0NjIsInVpZCI6MTExfQ.33256e7433c3e9e0c5e61fe190fc461e82c180378d3f22afa6a2042e85a0de03', '1586605662', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('27', '111', 'eyJleHAiOjE1ODcyMTA0NjMsInVpZCI6MTExfQ.3e4c79c39ba0974ca9c3377ad0c965c78517bd6be16bd37b2dcd1b72b1598917', '1586605663', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('28', '111', 'eyJleHAiOjE1ODcyMTA0NjQsInVpZCI6MTExfQ.079b2e5cfa5f27c957d9ea5ddd7498c624eeb7270312cc0c078e05a3c0b93c3a', '1586605664', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('29', '111', 'eyJleHAiOjE1ODcyMTA0NjQsInVpZCI6MTExfQ.079b2e5cfa5f27c957d9ea5ddd7498c624eeb7270312cc0c078e05a3c0b93c3a', '1586605664', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('30', '111', 'eyJleHAiOjE1ODcyMTA0NjUsInVpZCI6MTExfQ.179a803919f5749fc09534c4d2546880346bfc8bab097361ad983558c50b35e3', '1586605665', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('31', '111', 'eyJleHAiOjE1ODcyMTA0NjUsInVpZCI6MTExfQ.179a803919f5749fc09534c4d2546880346bfc8bab097361ad983558c50b35e3', '1586605665', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('32', '111', 'eyJleHAiOjE1ODcyMTA0NzksInVpZCI6MTExfQ.7ad2332e8581ca53f4aeecab3d83ca1999e31ae8d0d11d6af2fa569cb81c7e7a', '1586605679', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('33', '111', 'eyJleHAiOjE1ODcyMTA1MzAsInVpZCI6MTExfQ.c868d6f63f4d3b187c3d101614a8d048293ca6af7644b82dd86e5ca35920a61e', '1586605730', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('34', '111', 'eyJleHAiOjE1ODcyMTA1MzAsInVpZCI6MTExfQ.c868d6f63f4d3b187c3d101614a8d048293ca6af7644b82dd86e5ca35920a61e', '1586605730', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('35', '111', 'eyJleHAiOjE1ODcyMTA1MzEsInVpZCI6MTExfQ.964116e14dcbaafb7276db56c1311cb292aaeb90927553a2d1bf1f87ca822890', '1586605731', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('36', '111', 'eyJleHAiOjE1ODcyMTA1MzEsInVpZCI6MTExfQ.964116e14dcbaafb7276db56c1311cb292aaeb90927553a2d1bf1f87ca822890', '1586605731', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('37', '111', 'eyJleHAiOjE1ODcyMTA1MzIsInVpZCI6MTExfQ.eae5e952c11f0af142d5ced95357418450bea864f0ab19d205a50c172fdae958', '1586605732', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('38', '111', 'eyJleHAiOjE1ODcyMTA1MzgsInVpZCI6MTExfQ.3de49cd75152477ef6a97118c51befacd8da2d3a0b88d9c3ae9abba06d3a56bc', '1586605738', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('39', '111', 'eyJleHAiOjE1ODcyMTA1NDQsInVpZCI6MTExfQ.1abdd90fefffe6b23dc5820435f3a405eab9fa4d033bf94e5b6ad1c49c3cbd19', '1586605744', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('40', '111', 'eyJleHAiOjE1ODcyMTA1NDQsInVpZCI6MTExfQ.1abdd90fefffe6b23dc5820435f3a405eab9fa4d033bf94e5b6ad1c49c3cbd19', '1586605744', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('41', '111', 'eyJleHAiOjE1ODcyMTA5ODEsInVpZCI6MTExfQ.94534ea48060c24452f6928b27884469020499cb11f07b028782c0f37160343d', '1586606181', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('42', '111', 'eyJleHAiOjE1ODcyMTEyMTgsInVpZCI6MTExfQ.77c6b7c4f0c9ccc77bc146d2e46888a12d953b2076dc7e9d894ad5a781425939', '1586606418', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('43', '111', 'eyJleHAiOjE1ODcyMTEyMTksInVpZCI6MTExfQ.561dbd114f9817ad8974eae1a5b7e9448dac49a069a99b6b5f5375aa9155d360', '1586606419', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('44', '111', 'eyJleHAiOjE1ODcyMTEyNjQsInVpZCI6MTExfQ.65909646c4f1d9fa62fa45c76790c973df76d1e1709eb23b9f9d226dce5a71d8', '1586606464', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('45', '111', 'eyJleHAiOjE1ODcyMTEyNjUsInVpZCI6MTExfQ.0f81ae20b0c0e1bcf8150c663509bb17f9ad07a196f48b595b5640b6a6999f9b', '1586606465', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('46', '111', 'eyJleHAiOjE1ODcyMTEyNjYsInVpZCI6MTExfQ.a30470fcc11fdd20330fbc92a969e1365a70629f6ba81e5ccb8e35e2e184e3aa', '1586606466', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('47', '111', 'eyJleHAiOjE1ODcyMTEyNjYsInVpZCI6MTExfQ.a30470fcc11fdd20330fbc92a969e1365a70629f6ba81e5ccb8e35e2e184e3aa', '1586606466', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('48', '111', 'eyJleHAiOjE1ODcyMTEyNjcsInVpZCI6MTExfQ.9343770f04d1868110d1d3630b52bfbaad2c780ba7d8ad29acf5cae69d07b9b8', '1586606467', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('49', '111', 'eyJleHAiOjE1ODcyMTEyNjgsInVpZCI6MTExfQ.38199d691133ce6c72a53cf6e2a287dd347303afe0afa060eefea25cb7cf8330', '1586606468', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('50', '111', 'eyJleHAiOjE1ODcyMTEyNjgsInVpZCI6MTExfQ.38199d691133ce6c72a53cf6e2a287dd347303afe0afa060eefea25cb7cf8330', '1586606468', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('51', '111', 'eyJleHAiOjE1ODcyMTEyNjksInVpZCI6MTExfQ.27d156c44ea5092f60ee836b3418811cbf3fb7cce0a197b4bfd8f2c8182da85e', '1586606469', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('52', '111', 'eyJleHAiOjE1ODcyMTE2MDYsInVpZCI6MTExfQ.b35aa10ca70233d41dd7f5cbba41ddacefc4c443941fb5742badd2a40e61d114', '1586606806', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('53', '111', 'eyJleHAiOjE1ODcyMTE2NzYsInVpZCI6MTExfQ.c3d41655ca8242763b9ee2057e16ffb30dbc39c01d971cf0044b174f6df39094', '1586606876', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('54', '111', 'eyJleHAiOjE1ODcyMTE2NzcsInVpZCI6MTExfQ.3b308e632a58a4b9a51ed3092f60c58ed4b1e9717ccc034439fc3ebff307a7f8', '1586606877', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('55', '111', 'eyJleHAiOjE1ODcyMTE2NzcsInVpZCI6MTExfQ.3b308e632a58a4b9a51ed3092f60c58ed4b1e9717ccc034439fc3ebff307a7f8', '1586606877', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('56', '111', 'eyJleHAiOjE1ODcyMTE2NzgsInVpZCI6MTExfQ.f824f827307d001c5c8584fa2d3d64a41f273a943d2084085029648f5ff4b637', '1586606878', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('57', '111', 'eyJleHAiOjE1ODcyMTE2NzgsInVpZCI6MTExfQ.f824f827307d001c5c8584fa2d3d64a41f273a943d2084085029648f5ff4b637', '1586606878', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('58', '111', 'eyJleHAiOjE1ODcyMTE2NzksInVpZCI6MTExfQ.10ee98228955da707a4eff077899525637703745c3cc6e1be53395b80ccae7c3', '1586606879', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('59', '111', 'eyJleHAiOjE1ODcyMTE2NzksInVpZCI6MTExfQ.10ee98228955da707a4eff077899525637703745c3cc6e1be53395b80ccae7c3', '1586606879', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('60', '111', 'eyJleHAiOjE1ODcyMTE2ODAsInVpZCI6MTExfQ.a6fe066ac36269cd0fdbcdb9770c89892ed59d996738b1452f934013e02837ad', '1586606880', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('61', '111', 'eyJleHAiOjE1ODcyMTE2ODAsInVpZCI6MTExfQ.a6fe066ac36269cd0fdbcdb9770c89892ed59d996738b1452f934013e02837ad', '1586606880', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('62', '111', 'eyJleHAiOjE1ODcyMTE2ODIsInVpZCI6MTExfQ.a19e9b323024a774ab78ac4055f0e319fc4b481be4211accfac57ffc507beb4c', '1586606882', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('63', '111', 'eyJleHAiOjE1ODcyMTE2ODMsInVpZCI6MTExfQ.c3feecb441fd04cef88c3582d268169bc1fb07d054f2295a8e13d4736e045d32', '1586606883', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('64', '111', 'eyJleHAiOjE1ODcyMTE2ODMsInVpZCI6MTExfQ.c3feecb441fd04cef88c3582d268169bc1fb07d054f2295a8e13d4736e045d32', '1586606883', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('65', '111', 'eyJleHAiOjE1ODcyMTE4MTMsInVpZCI6MTExfQ.0bedd705f853c2141c72b9c57c6b0509ae5165d35e30e26b88de5fa4c657b8f0', '1586607013', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('66', '111', 'eyJleHAiOjE1ODcyMTE4MTQsInVpZCI6MTExfQ.ef476a5464f9726370d875fff9095ef9891ba2849e225e7f1325882d346524d8', '1586607014', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('67', '111', 'eyJleHAiOjE1ODcyMTE4MTcsInVpZCI6MTExfQ.4bb807698067565dd1170fedb09d0ce4a78e0e6465556328e815c30579a90f29', '1586607017', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('68', '111', 'eyJleHAiOjE1ODcyMTE4MTksInVpZCI6MTExfQ.ee9fe0ffce6b9df4ace35b5edc1326fc810c0ac4f47078d3d58e3538d8b3b621', '1586607019', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('69', '111', 'eyJleHAiOjE1ODcyMTE4MjIsInVpZCI6MTExfQ.eb687847863ff10c8c48f55feff576fd2b7871f35c917705ecd141d1dd41ef0c', '1586607022', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('70', '111', 'eyJleHAiOjE1ODcyMTc4NDUsInVpZCI6MTExfQ.9abf174e6f72506a57c2b9c84d2a2adb05b2e9d510c80e2ecac5010af8347296', '1586613045', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('71', '111', 'eyJleHAiOjE1ODcyMTc4NTcsInVpZCI6MTExfQ.a09422f1db8af4bd3f4df5fbc7d7891cce7b92d6283c4b26ab352616b70c09f7', '1586613057', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('72', '111', 'eyJleHAiOjE1ODcyMTc5NDcsInVpZCI6MTExfQ.d3aa26fdc78021b99be40c378da972af8252d3bfba23fb98161cc8cfeae8ed5f', '1586613147', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('73', '111', 'eyJleHAiOjE1ODcyMTc5NDgsInVpZCI6MTExfQ.9211dabe73b4efbeb2289d9a055fa4722e29fc4d6970a7d5c44b4175072a5ff9', '1586613148', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('74', '111', 'eyJleHAiOjE1ODcyMTc5NzMsInVpZCI6MTExfQ.2a3ed9f5b85653215f76a7c06b928c99f7e3515c29453e6485f984fb2c8c2ca9', '1586613173', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('75', '111', 'eyJleHAiOjE1ODcyMjgxNDYsInVpZCI6MTExfQ.235385f6d6b204ccd663f2f6d6408182a6d5ba1a7f80c7526a5be72d2ad4633d', '1586623346', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('76', '111', 'eyJleHAiOjE1ODcyMjgxODEsInVpZCI6MTExfQ.78a127fb94e3631fa65f54bca00c1bb0bebb8fee32a539fec441e827ddfac67e', '1586623381', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('77', '111', 'eyJleHAiOjE1ODcyMjgxODMsInVpZCI6MTExfQ.6156ea5de91e148d33c77af3488f8120859ce33a5fd364a666dca760d0695c7f', '1586623383', '127.0.0.1', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_user_login_log` VALUES ('78', '111', 'eyJleHAiOjE1ODg3NTgxMjYsInVpZCI6MTExfQ.7177c7e32cf60e11bcd9b3a2274967c2ad96133513ab3db41a972d4f7228b4b1', '1588153326', '127.0.0.1', 'Chrome,78.0.3904.108');
+
+-- ----------------------------
+-- Table structure for `ding_user_token`
+-- ----------------------------
+DROP TABLE IF EXISTS `ding_user_token`;
+CREATE TABLE `ding_user_token` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `addTime` int(10) NOT NULL,
+  `ip` varchar(255) DEFAULT NULL,
+  `agent` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ding_user_token
+-- ----------------------------
+INSERT INTO `ding_user_token` VALUES ('78', '111', 'eyJleHAiOjE1ODg3NTgxMjYsInVpZCI6MTExfQ.7177c7e32cf60e11bcd9b3a2274967c2ad96133513ab3db41a972d4f7228b4b1', '1588153326', '127.0.0.1', 'Chrome,78.0.3904.108');
