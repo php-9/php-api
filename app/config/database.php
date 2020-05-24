@@ -8,7 +8,7 @@ $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'mysql:dbname=api;host=127.0.0.1',
 	'username' => 'root',
-	'password' => 'root',
+	'password' => 'iphp999',
 	'database' => '',
 	'dbdriver' => 'pdo',
 	'dbprefix' => 'ding_',
