@@ -99,8 +99,17 @@ class User extends Api_Controller {
 		$this->load->library('jwt');
 		
 		
-		$username=$this->payload('username');
-		$password=$this->payload('password');
+		$username=$this->input->get('username');
+		$password=$this->input->get('password');
+		$verify=$this->input->get('verify');
+		$verify_uni=$this->input->get('verify_uni');
+
+		//获取缓存
+		$code=$this->cache->get($verify_uni);
+
+		if($verify!=$code){
+			$this->fail('验证码错误！');
+		}
 
 		$password=md5($password);
 
