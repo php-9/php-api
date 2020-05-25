@@ -1,20 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class User extends Api_Controller {
+class Goods extends Api_Controller {
 
-	protected $noNeedLogin=['login','code','verify_code'];
+	protected $noNeedLogin=[];
 	public function __construct(){
 		parent::__construct();					
 	}
 	public function index(){	
 		
-		// $this->db->insert('admin',array(
-		// 	'username'=>'a'.mt_rand(1000,9999),
-		// 	'addTime'=>time(),
-		// 	'password'=>'asdfasdas'
-		// 	));
-		// 	
 		$res=[];
 		$res['pageNum']=$this->payload('pageNum') ? $this->payload('pageNum') : 1;
 		//每页有多少行数据
@@ -23,12 +17,12 @@ class User extends Api_Controller {
 
 		$res['list']=$this->db	    
 						->limit( $res['pageSize'], ($res['pageNum']-1)*$res['pageSize'] )		
-						->get('user')
+						->get('goods')
 						->result_array();
 
 		$res['pageTotal']=$this->db	    
 								
-							->get('user')
+							->get('goods')
 							->num_rows();
 
 
@@ -48,38 +42,38 @@ class User extends Api_Controller {
 
 	}
 
-	//添加用户
+	//添加产品
 	public function add(){
-		//user数据
-		$userData=[];
-		$userData['username']=$this->payload('username');
-		$userData['password']=$this->payload('password');
-		$userData['role']=$this->payload('role');
-		$userData['realname']=$this->payload('realname');
-		$userData['position']=$this->payload('position');
-		$userData['create_time']=time();
+		//goods数据
+		$goodsData=[];
+		$goodsData['name']=$this->payload('name');
+		$goodsData['brand']=$this->payload('brand');
+		$goodsData['year']=$this->payload('year');
+		$goodsData['thumbs']=$this->payload('thumbs');		
+		$goodsData['create_time']=time();
+
+		//品牌，年份，名称是否相同
+		$goods=$this->db->where('brand',$goodsData['brand'])
+						->where('year',$goodsData['year'])
+						->where('name',$goodsData['name'])
+						->get('goods')
+						->row_array();
+		//存在产品
+		if($goods){
+			//返回产品id
+			$this->success(['goods_id'=>$goods['id']],200);
+		}else{
+			//添加产品
+			if( $this->db->insert('goods',$goodsData) ){
+				//返回产品id
+				$this->success(['goods_id'=>$this->db->insert_id()],200);
+			}
+
+		}
 
 		
-		if(!$userData['username']){
-			$this->fail('请输入帐号');
-		}
 
-		if(!$userData['password']){
-			$this->fail('请输入密码');
-		}
-
-		if(!$userData['role']) $this->fail('请选择角色');
-		
-
-		if($this->db->where('username',$userData['username'])->get('user')->row_array()){
-			$this->fail('帐号已存在');
-		}
-
-		if( $this->db->insert('user',$userData) ){
-			$this->success([],200);
-		}
-
-		$this->fail('添加失败');
+		$this->fail('添加操作失败');
 		
 
 	}
@@ -198,73 +192,8 @@ class User extends Api_Controller {
 	}
 
 
-	/////////
-	//验证码 //
-	/////////
-	public function code(){
 
-		//$id=$this->input->get('id');
-		//唯一id
-		$uni=md5(uniqid(md5(microtime(true)),true));
-
-		//缓存数据
-		//$this->cache->save($uni, '这是验证码', 300);
-		//
-		//$this->cache->get('3ef7d8ab3a3e35b60cb3b771f6caf7c6');
-		$data['verify_uni']=$uni;
-		$data['verify_url']=base_url().'uploads/verify_code/'.$uni.'.jpg';		
-
-		$this->verify_code($uni);//生成验证码图片
-
-		$this->success($data);
-
-	}
-
-
-	//验证码
-	private function verify_code($uni=''){
-		//创建一个大小为 150*38 的验证码  
-		$image = imagecreatetruecolor(126, 32);  
-		$bgcolor = imagecolorallocate($image, 255, 255, 255);  
-		imagefill($image, 0, 0, $bgcolor);  
-		  
-		$captch_code = '';  
-		for ($i = 0; $i < 4; $i++) {  
-		    $fontsize = 5;  
-		    $fontcolor = imagecolorallocate($image, rand(0, 160), rand(0, 160), rand(0, 160));  
-		    $data = 'abcdefghjkmnpqrstuvwxy23456789';  
-		    $fontcontent = substr($data, rand(0, strlen($data) - 1), 1);
-		    $captch_code .= $fontcontent;  
-		    $x = $i * 126 / 4 + rand(5,8);//($i * 150 / 4) + rand(5, 10);  
-		    $y = rand(22, 25);  
-		    //imagestring($image, $fontsize, $x, $y, $fontcontent, $fontcolor); 
-		    $size=rand(16,22);
-		    imagefttext($image, $size , 0,  $x, $y, $fontcolor, realpath('./static/captcha/CharlemagneStd-Bold.otf'),$fontcontent); 
-		}  
-
-
-		//就生成的验证码保存到session  
-		$this->cache->save($uni, $captch_code, 300);		  
-		 
-		//在图片上增加点干扰元素  
-		for ($i = 0; $i < 200; $i++) {  
-		    $pointcolor = imagecolorallocate($image, rand(180, 200), rand(180, 200), rand(180, 200));  
-		    imagesetpixel($image, rand(1, 149), rand(1, 37), $pointcolor);  
-		}  
-		  
-		//在图片上增加线干扰元素  
-		for ($i = 0; $i < 3; $i++) {  
-		    $linecolor = imagecolorallocate($image, rand(180, 220), rand(180, 220), rand(180, 220));  
-		    imageline($image, rand(1, 149), rand(1, 37), rand(1, 149), rand(1, 37), $linecolor);  
-		}
-
-		
-		//设置头  
-		header('content-type:image/png');  
-		imagepng($image,'./uploads/verify_code/'.$uni.'.jpg');  
-		imagedestroy($image);
-	}
-
+	
 
 		
 

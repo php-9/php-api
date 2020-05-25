@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2020-05-24 16:46:26
+Date: 2020-05-25 17:24:28
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,7 +27,7 @@ CREATE TABLE `ding_admin` (
   `status` tinyint(1) DEFAULT '1',
   `group_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of ding_admin
@@ -51,6 +51,7 @@ INSERT INTO `ding_admin` VALUES ('19', 'a2797', 'asdfasdas', '1588229496', '1', 
 INSERT INTO `ding_admin` VALUES ('20', 'a1018', 'asdfasdas', '1588229498', '1', null);
 INSERT INTO `ding_admin` VALUES ('22', 'admmm', 'admmm888', '1588572498', '1', null);
 INSERT INTO `ding_admin` VALUES ('23', 'admin2', 'admmm888', '1588572713', '1', null);
+INSERT INTO `ding_admin` VALUES ('24', 'sgfsdg', '435235', '1590371929', '1', null);
 
 -- ----------------------------
 -- Table structure for `ding_admin_group`
@@ -81,7 +82,7 @@ CREATE TABLE `ding_admin_log` (
   `addtime` int(10) DEFAULT NULL,
   `agent` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ding_admin_log
@@ -177,6 +178,7 @@ INSERT INTO `ding_admin_log` VALUES ('104', '4', 'admin', '127.0.0.1', '成功�
 INSERT INTO `ding_admin_log` VALUES ('105', '4', 'admin', '127.0.0.1', '成功登录', '1', '1589795921', 'Chrome,78.0.3904.108');
 INSERT INTO `ding_admin_log` VALUES ('106', '4', 'admin', '10.0.0.15', '成功登录', '1', '1590300148', 'Chrome,69.0.3497.100');
 INSERT INTO `ding_admin_log` VALUES ('107', '4', 'admin', '127.0.0.1', '成功登录', '1', '1590300592', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('108', '4', 'admin', '127.0.0.1', '成功登录', '1', '1590370502', 'Chrome,78.0.3904.108');
 
 -- ----------------------------
 -- Table structure for `ding_admin_rule`
@@ -197,9 +199,9 @@ CREATE TABLE `ding_admin_rule` (
 -- Records of ding_admin_rule
 -- ----------------------------
 INSERT INTO `ding_admin_rule` VALUES ('1', '0', '帐号管理', null, null, '1', null);
-INSERT INTO `ding_admin_rule` VALUES ('2', '1', '帐号列表', 'admin/index', null, '0', 'user');
-INSERT INTO `ding_admin_rule` VALUES ('3', '1', '添加帐户', 'admin/add', null, '0', null);
-INSERT INTO `ding_admin_rule` VALUES ('4', '1', '编辑帐户', 'admin/edit', null, '0', null);
+INSERT INTO `ding_admin_rule` VALUES ('2', '1', '帐号列表', 'user/index', null, '0', 'user');
+INSERT INTO `ding_admin_rule` VALUES ('3', '1', '添加帐户', 'user/add', null, '0', null);
+INSERT INTO `ding_admin_rule` VALUES ('4', '1', '编辑帐户', 'user/edit', null, '0', null);
 INSERT INTO `ding_admin_rule` VALUES ('5', '0', '订单管理', null, null, '0', null);
 INSERT INTO `ding_admin_rule` VALUES ('6', '0', '产品管理', '', null, '1', null);
 INSERT INTO `ding_admin_rule` VALUES ('7', '6', '产品列表', 'goods/index', null, '0', 'goods');
@@ -216,12 +218,12 @@ CREATE TABLE `ding_admin_session` (
   `u_id` int(11) DEFAULT NULL,
   `addtime` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ding_admin_session
 -- ----------------------------
-INSERT INTO `ding_admin_session` VALUES ('79', 'eyJleHAiOjE1OTA5MDUzOTIsInVpZCI6IjQifQ.6ff28813103f308b7d98e159b6e66844163dab84cfedf13bdde799a6aa384145', 'admin', '4', '1590300592');
+INSERT INTO `ding_admin_session` VALUES ('80', 'eyJleHAiOjE1OTA5NzUzMDIsInVpZCI6IjQifQ.0f2643d1675c468cb2a8c87e8ecc8ccf653688a7a09440a43346f5b990870beb', 'admin', '4', '1590370502');
 
 -- ----------------------------
 -- Table structure for `ding_archive`
@@ -419,6 +421,31 @@ INSERT INTO `ding_field` VALUES ('23', '4', '常见问题解答', 'pro_3', '', '
 INSERT INTO `ding_field` VALUES ('24', '4', '证明', 'pro_4', '', '', '10', '50');
 
 -- ----------------------------
+-- Table structure for `ding_goods`
+-- ----------------------------
+DROP TABLE IF EXISTS `ding_goods`;
+CREATE TABLE `ding_goods` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `year` varchar(4) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `thumbs` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `brand` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `create_time` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of ding_goods
+-- ----------------------------
+INSERT INTO `ding_goods` VALUES ('1', '2019', '测试某茶1', null, '大益', '1590393071');
+INSERT INTO `ding_goods` VALUES ('2', '2016', '测试某茶2', 'aaa', '大益', '1590393235');
+INSERT INTO `ding_goods` VALUES ('3', '2017', '测试某茶3', 'bbb', '陈升号', '1590393254');
+INSERT INTO `ding_goods` VALUES ('4', '2016', '测试某茶4', 'bbbs', '冰岛', '1590393263');
+INSERT INTO `ding_goods` VALUES ('5', '2015', '测试某茶5', 'ssss', '大益', '1590393273');
+INSERT INTO `ding_goods` VALUES ('6', null, null, null, null, '1590396100');
+INSERT INTO `ding_goods` VALUES ('7', '2020', 'asfdas', null, '大益', '1590396430');
+
+-- ----------------------------
 -- Table structure for `ding_log`
 -- ----------------------------
 DROP TABLE IF EXISTS `ding_log`;
@@ -534,24 +561,33 @@ CREATE TABLE `ding_token` (
 DROP TABLE IF EXISTS `ding_user`;
 CREATE TABLE `ding_user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `realname` varchar(255) DEFAULT NULL,
   `department` varchar(255) DEFAULT NULL,
   `position` varchar(255) DEFAULT NULL,
-  `username` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `auth` tinyint(1) DEFAULT NULL,
-  `addtime` int(10) DEFAULT NULL,
-  `isdel` tinyint(1) NOT NULL DEFAULT '0',
+  `role` tinyint(1) DEFAULT NULL COMMENT '角色',
+  `create_time` int(10) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ding_user
 -- ----------------------------
-INSERT INTO `ding_user` VALUES ('1', '黄大小', '销售部', '业务员', 'a123456', 'e10adc3949ba59abbe56e057f20f883e', '1', '1585119910', '0');
-INSERT INTO `ding_user` VALUES ('2', '李小春', '市场部', '设计员', 'a123458', 'e10adc3949ba59abbe56e057f20f883e', '2', '1585120074', '0');
-INSERT INTO `ding_user` VALUES ('3', '李天一', '总经办', '人事总监', 'a123459', 'e10adc3949ba59abbe56e057f20f883e', '3', '1585120118', '0');
-INSERT INTO `ding_user` VALUES ('4', '准备删除', '工厂部', '工人', 'a1111111', 'e10adc3949ba59abbe56e057f20f883e', '2', '1585172179', '1');
+INSERT INTO `ding_user` VALUES ('1', 'a123456', 'e10adc3949ba59abbe56e057f20f883e', '黄大小', '销售部', '业务员', '1', '1585119910', '0');
+INSERT INTO `ding_user` VALUES ('2', 'a123458', '123', '李小春', '市场部', '设计员', '2', '1585120074', '0');
+INSERT INTO `ding_user` VALUES ('3', 'a123459', 'e10adc3949ba59abbe56e057f20f883e', '李天一', '总经办', '人事总监', '3', '1585120118', '1');
+INSERT INTO `ding_user` VALUES ('5', 'abc123', '123', '姓名', null, '', '2', null, '0');
+INSERT INTO `ding_user` VALUES ('6', 'abc123', '123', '姓名', null, '', '2', null, '0');
+INSERT INTO `ding_user` VALUES ('8', 'abc123', '123', '姓名', null, '', '2', null, '0');
+INSERT INTO `ding_user` VALUES ('9', 'abc123', '123', '姓名', null, '', '2', null, '0');
+INSERT INTO `ding_user` VALUES ('10', 'abc123', '123', '姓名', null, '', '2', null, '0');
+INSERT INTO `ding_user` VALUES ('11', 'abc', '123', 'abcwawa', null, '', '1', '1590375438', '0');
+INSERT INTO `ding_user` VALUES ('12', 'abc', '123', 'abcwawa', null, '', '1', '1590375481', '0');
+INSERT INTO `ding_user` VALUES ('13', 'ddd', '123', 'dddwuwu', null, 'sa', '3', '1590375708', '0');
+INSERT INTO `ding_user` VALUES ('15', 'abcwawa', 'sfs', 'asf', null, '', '1', '1590375833', '0');
+INSERT INTO `ding_user` VALUES ('16', 'admin', 'admin', 'admin', null, 'admin', '1', '1590388915', '1');
 
 -- ----------------------------
 -- Table structure for `ding_user_login_log`
