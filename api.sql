@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2020-05-25 17:24:28
+Date: 2020-05-29 14:48:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -82,7 +82,7 @@ CREATE TABLE `ding_admin_log` (
   `addtime` int(10) DEFAULT NULL,
   `agent` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ding_admin_log
@@ -179,6 +179,11 @@ INSERT INTO `ding_admin_log` VALUES ('105', '4', 'admin', '127.0.0.1', '成功�
 INSERT INTO `ding_admin_log` VALUES ('106', '4', 'admin', '10.0.0.15', '成功登录', '1', '1590300148', 'Chrome,69.0.3497.100');
 INSERT INTO `ding_admin_log` VALUES ('107', '4', 'admin', '127.0.0.1', '成功登录', '1', '1590300592', 'Chrome,78.0.3904.108');
 INSERT INTO `ding_admin_log` VALUES ('108', '4', 'admin', '127.0.0.1', '成功登录', '1', '1590370502', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('109', '4', 'admin', '10.0.0.24', '成功登录', '1', '1590548046', 'Chrome,69.0.3497.100');
+INSERT INTO `ding_admin_log` VALUES ('110', '4', 'admin', '127.0.0.1', '成功登录', '1', '1590557922', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('111', '4', 'admin', '127.0.0.1', '成功登录', '1', '1590563487', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('112', '4', 'admin', '127.0.0.1', '成功登录', '1', '1590629518', 'Chrome,78.0.3904.108');
+INSERT INTO `ding_admin_log` VALUES ('113', '4', 'admin', '127.0.0.1', '成功登录', '1', '1590648093', 'Chrome,78.0.3904.108');
 
 -- ----------------------------
 -- Table structure for `ding_admin_rule`
@@ -218,12 +223,12 @@ CREATE TABLE `ding_admin_session` (
   `u_id` int(11) DEFAULT NULL,
   `addtime` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ding_admin_session
 -- ----------------------------
-INSERT INTO `ding_admin_session` VALUES ('80', 'eyJleHAiOjE1OTA5NzUzMDIsInVpZCI6IjQifQ.0f2643d1675c468cb2a8c87e8ecc8ccf653688a7a09440a43346f5b990870beb', 'admin', '4', '1590370502');
+INSERT INTO `ding_admin_session` VALUES ('85', 'eyJleHAiOjE1OTEyNTI4OTMsInVpZCI6IjQifQ.2a6e72241fb23960873524e89dedb1c0e141d75330191a63f0aa6c7bb909b7d9', 'admin', '4', '1590648093');
 
 -- ----------------------------
 -- Table structure for `ding_archive`
@@ -426,24 +431,52 @@ INSERT INTO `ding_field` VALUES ('24', '4', '证明', 'pro_4', '', '', '10', '50
 DROP TABLE IF EXISTS `ding_goods`;
 CREATE TABLE `ding_goods` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `year` varchar(4) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `thumbs` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `brand` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `create_time` int(10) DEFAULT NULL,
+  `year` varchar(4) NOT NULL DEFAULT '',
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `images` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `brand` varchar(255) NOT NULL DEFAULT '',
+  `add_time` int(10) NOT NULL DEFAULT '0',
+  `upd_time` int(10) NOT NULL DEFAULT '0',
+  `is_del_time` int(10) NOT NULL DEFAULT '0',
+  `is_shelves` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of ding_goods
 -- ----------------------------
-INSERT INTO `ding_goods` VALUES ('1', '2019', '测试某茶1', null, '大益', '1590393071');
-INSERT INTO `ding_goods` VALUES ('2', '2016', '测试某茶2', 'aaa', '大益', '1590393235');
-INSERT INTO `ding_goods` VALUES ('3', '2017', '测试某茶3', 'bbb', '陈升号', '1590393254');
-INSERT INTO `ding_goods` VALUES ('4', '2016', '测试某茶4', 'bbbs', '冰岛', '1590393263');
-INSERT INTO `ding_goods` VALUES ('5', '2015', '测试某茶5', 'ssss', '大益', '1590393273');
-INSERT INTO `ding_goods` VALUES ('6', null, null, null, null, '1590396100');
-INSERT INTO `ding_goods` VALUES ('7', '2020', 'asfdas', null, '大益', '1590396430');
+INSERT INTO `ding_goods` VALUES ('14', '2020', '', '', '大益', '1590562259', '0', '0', '1');
+INSERT INTO `ding_goods` VALUES ('15', '2019', '', '', '陈升号', '1590562581', '0', '0', '1');
+INSERT INTO `ding_goods` VALUES ('16', '2017', '', '', '陈升号', '1590563213', '0', '0', '1');
+INSERT INTO `ding_goods` VALUES ('17', '2017', '', '', '大益', '1590563263', '0', '0', '1');
+INSERT INTO `ding_goods` VALUES ('18', '2019', '', '', '大益', '1590563707', '0', '0', '1');
+INSERT INTO `ding_goods` VALUES ('19', '2020', '', '', '陈升号', '1590564200', '0', '0', '1');
+INSERT INTO `ding_goods` VALUES ('20', '', '', '', '陈升号', '1590564230', '0', '0', '1');
+INSERT INTO `ding_goods` VALUES ('21', '2019', 'asdfasdf', '', '陈升号', '1590564365', '0', '0', '1');
+INSERT INTO `ding_goods` VALUES ('22', '2019', 'safdasdf', '', '陈升号', '1590564479', '0', '0', '1');
+INSERT INTO `ding_goods` VALUES ('23', '2018', 'asdfasfas', '', '陈升号', '1590565009', '0', '0', '1');
+INSERT INTO `ding_goods` VALUES ('24', '2019', 'adds3242', '', '大益', '1590565039', '0', '0', '1');
+INSERT INTO `ding_goods` VALUES ('25', '2019', 'sdgfsd', '', '大益', '1590565124', '0', '0', '1');
+INSERT INTO `ding_goods` VALUES ('26', '2020', '这是标题', '', '大益', '1590569209', '0', '0', '1');
+
+-- ----------------------------
+-- Table structure for `ding_goods_buy`
+-- ----------------------------
+DROP TABLE IF EXISTS `ding_goods_buy`;
+CREATE TABLE `ding_goods_buy` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `goods_id` int(11) NOT NULL DEFAULT '0',
+  `spec_base` text,
+  `is_del_time` int(10) NOT NULL DEFAULT '0',
+  `add_time` int(10) NOT NULL DEFAULT '0',
+  `upd_time` int(10) NOT NULL DEFAULT '0',
+  `price` decimal(10,2) NOT NULL DEFAULT '0.00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of ding_goods_buy
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `ding_log`

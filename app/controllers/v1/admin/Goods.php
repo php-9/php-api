@@ -44,20 +44,25 @@ class Goods extends Api_Controller {
 
 	//添加产品
 	public function add(){
+
+
 		//goods数据
 		$goodsData=[];
-		$goodsData['name']=$this->payload('name');
+		$goodsData['title']=$this->payload('title');
 		$goodsData['brand']=$this->payload('brand');
 		$goodsData['year']=$this->payload('year');
-		$goodsData['thumbs']=$this->payload('thumbs');		
-		$goodsData['create_time']=time();
+		$goodsData['images']=$this->payload('images');		
+		$goodsData['add_time']=time();
 
 		//品牌，年份，名称是否相同
 		$goods=$this->db->where('brand',$goodsData['brand'])
 						->where('year',$goodsData['year'])
-						->where('name',$goodsData['name'])
+						->where('title',$goodsData['title'])
 						->get('goods')
 						->row_array();
+
+
+					
 		//存在产品
 		if($goods){
 			//返回产品id
@@ -119,77 +124,9 @@ class Goods extends Api_Controller {
 
 	
 
-	//登录 
-	public function login(){
-
-		$this->load->library('user_agent');//浏览器信息
-		$this->load->library('jwt');
-		
-		
-		$username=$this->input->get('username');
-		$password=$this->input->get('password');
-		$verify=$this->input->get('verify');
-		$verify_uni=$this->input->get('verify_uni');
-
-		//获取缓存
-		$code=$this->cache->get($verify_uni);
-
-		if($verify!=$code){
-			$this->fail('验证码错误！');
-		}
-
-		$password=md5($password);
-
-		if($u=$this->db->where('username',$username)->where('password',$password)->get('admin')->row_array()){
+	
 
 
-			//生成token	
-			$token=	$this->jwt->getToken($u['id']);	
-			//记录登录日志
-			$logArr['ip']=$this->input->ip_address();
-			$logArr['u_id']=$u['id'];
-			$logArr['username']=$u['username'];
-			$logArr['description']='成功登录';
-			$logArr['agent']=$this->agent->browser().','.$this->agent->version();//浏览器信息
-			$logArr['addtime']=time();
-			$logArr['type']=1;//登录
-
-			$this->db->insert('admin_log',$logArr);
-
-
-			//记录登录 token
-			//只允许单点登录,同一账号不能同时登录
-			$sessArr['token']=$token;
-			$sessArr['u_id']=$u['id'];
-			$sessArr['username']=$u['username'];
-			$sessArr['addtime']=time();
-			$this->db->where('u_id',$u['id'])->delete('admin_session');//删除之前登录
-			$this->db->insert('admin_session',$sessArr);//重写新登录
-
-			$res['token']=	$token;		
-			//返回token等数据
-			$this->success($res);
-		}
-
-		$this->fail('帐号密码错误！');
-
-	}
-
-	//帐号状态
-	public function  status(){
-		//更新状态
-		if($_SERVER['REQUEST_METHOD']=='PUT'){
-			$uid=$this->payload('id');
-			$data=[];
-			$data['status']=$this->payload('status');
-			if($this->db->where('id',$uid)->update('admin',$data)){
-				$this->success([],200,'数据更新成功');
-			}
-			
-		}
-
-		$this->fail('操作失败！');
-	}
 
 
 

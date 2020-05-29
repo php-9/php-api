@@ -68,19 +68,29 @@ class Api_Controller extends CI_Controller{
 
 
 	//获取playload数据
-	//axios默认发送的payload,要用php://input获取
-	public function payload($index){
+	//axios默认发送的payload json,要用php://input获取
+	//参数，$index标识，$default默认输出
+	public function payload($index='',$default=''){
 		// 获取payload json数据，转换成数组形式
 		$postData = file_get_contents('php://input');
 		$requests = !empty($postData) ? json_decode($postData, true) : array();
+
+		if($_SERVER['REQUEST_METHOD']=='GET' || !$requests ){
+			return  array();
+		}
+
+		if($index==''){
+			return $requests;
+		}
 
 		if(isset($requests[$index])){
 			return $requests[$index];
 		}
 
-		return NULL;
+		return $default;
 		
 	}
+
 
 
 	/*无限分类列表*/
