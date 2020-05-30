@@ -29,13 +29,16 @@ class Upload extends CI_Controller {
 			
 			echo json_encode(array(
 				'code'=>1,
+				'msg'=>"上传成功",
 				'data'=>$fileArr
 			));
 			
 		}else{//失败
+
 			echo json_encode(array(
 				'code'=>0,
-				'data'=>array()
+				'data'=>array(),
+				'msg'=>'上传失败'
 			));
 		}
 		
