@@ -16,7 +16,9 @@ class Goods extends Api_Controller {
 		
 
 		$res['list']=$this->db	    
-						->limit( $res['pageSize'], ($res['pageNum']-1)*$res['pageSize'] )		
+						->limit( $res['pageSize'], ($res['pageNum']-1)*$res['pageSize'] )	
+
+						->order_by('id DESC')	
 						->get('goods')
 						->result_array();
 
@@ -51,8 +53,11 @@ class Goods extends Api_Controller {
 		$goodsData['title']=$this->payload('title');
 		$goodsData['brand']=$this->payload('brand');
 		$goodsData['year']=$this->payload('year');
-		$goodsData['images']=$this->payload('images');		
+			
 		$goodsData['add_time']=time();
+		$image=$this->payload('upload');
+		$goodsData['images']=$image[0]['url'];	
+
 
 		//品牌，年份，名称是否相同
 		$goods=$this->db->where('brand',$goodsData['brand'])
@@ -65,15 +70,13 @@ class Goods extends Api_Controller {
 					
 		//存在产品
 		if($goods){
-			//返回产品id
-			$this->success(['goods_id'=>$goods['id']],200);
-		}else{
-			//添加产品
-			if( $this->db->insert('goods',$goodsData) ){
-				//返回产品id
-				$this->success(['goods_id'=>$this->db->insert_id()],200);
-			}
+			
+			$this->fail('产品已存在');
+		}
 
+		//插入数据库
+		if( $this->db->insert('goods',$goodsData) ){
+			$this->success();
 		}
 
 		
@@ -84,7 +87,7 @@ class Goods extends Api_Controller {
 	}
 
 
-	//编辑用户
+	//编辑产品
 	public function edit(){
 		$id=$this->payload('id');
 		$realname=$this->payload('realname');
@@ -98,7 +101,7 @@ class Goods extends Api_Controller {
 		$userData['realname']=$realname;
 		$userData['status']=$status;
 		if(!$id) $this->fail('参数错误');
-		if( $this->db->where('id',$id)->update('user',$userData) ){
+		if( $this->db->where('id',$id)->update('goods',$userData) ){
 			$this->success();
 		}
 
@@ -109,10 +112,10 @@ class Goods extends Api_Controller {
 
 	//删除用户
 	public function del(){
-		$id=$this->input->get('id');
+		$id=$this->payload('id');
 		if(!$id) $this->fail('参数错误');
 
-		if( $this->db->where('id',$id)->delete('user') ){
+		if( $this->db->where('id',$id)->delete('goods') ){
 			$this->success();
 		}
 
