@@ -56,6 +56,8 @@ class Goods extends Api_Controller {
 			
 		$goodsData['add_time']=time();
 		$image=$this->payload('upload');
+
+		
 		$goodsData['images']=$image[0]['url'];	
 
 
